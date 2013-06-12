@@ -1,0 +1,12 @@
+indexSuccess:
+
+  stylesheets: [ lib.ui-tabs, admin.codeEditor ]
+    
+  javascripts: [ lib.ui-tabs, lib.jstree, core.codeArea, admin.codeEditor ]
+    
+   
+openFileSuccess:
+
+  stylesheets: []
+  javascripts: []
+  has_layout:  false

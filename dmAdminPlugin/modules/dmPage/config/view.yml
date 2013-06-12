@@ -1,0 +1,9 @@
+all:
+  stylesheets:  [ lib.ui-tabs ]
+
+reorderPagesSuccess:
+  javascripts:  [ lib.jstree, admin.pageTree ]
+
+manageMetasSuccess:
+  stylesheets:  [ admin.manualSeo ]
+  javascripts:  [ lib.jeditable, lib.dataTable, admin.manualSeo ]

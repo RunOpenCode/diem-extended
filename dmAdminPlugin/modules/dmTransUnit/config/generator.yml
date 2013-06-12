@@ -1,0 +1,41 @@
+generator:
+  class: dmAdminDoctrineGenerator
+  param:
+    model_class: DmTransUnit
+    theme: dmAdmin
+    non_verbose_templates: true
+    with_show: false
+    route_prefix: dm_trans_unit
+    with_doctrine_route: false
+    config:
+      actions: ~
+      fields:
+        dm_catalogue_id: { label: Catalogue }
+      list:
+        display:
+          - =source
+          - target
+          - dm_catalogue_id
+          - meta
+          - created_at
+          - updated_at
+        sort:
+          - id
+          - asc
+        table_method: getAdminListQuery
+        table_count_method: ~
+        loremize: false
+      filter:
+        display:
+          - dm_catalogue_id
+          - source
+          - target
+          - meta
+      form:
+        display:
+          NONE: [source, target, dm_catalogue_id, meta]
+        class: DmTransUnitAdminForm
+        fields: {  }
+      edit: ~
+      new: ~
+    sortable: false

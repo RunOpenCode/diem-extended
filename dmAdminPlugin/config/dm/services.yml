@@ -1,0 +1,203 @@
+parameters:
+
+  homepage_manager.class:     dmAdminHomepageManager # Responsible for managing and rendering windows on admin homepage.
+
+  bread_crumb.class:          dmAdminBreadCrumb # Responsible for building and rendering the admin automatic breadcrumbs.
+
+  log_chart.class:            dmLogChart        # Responsible for rendering the log chart
+  log_chart.options:
+    name:                     Server            # public name for this chart
+    lifetime:                 1800              # time in seconds to keep a cached version of the chart
+    credentials:              see_chart
+
+  week_chart.class:           dmWeekChart       # Responsible for rendering the week chart
+  week_chart.options:
+    name:                     This Week         # public name for this chart
+    lifetime:                 21600             # time in seconds to keep a cached version of the chart
+    credentials:              see_chart
+
+  visit_chart.class:          dmVisitChart      # Responsible for rendering the visit chart
+  visit_chart.options:
+    name:                     This Year         # public name for this chart
+    lifetime:                 43200             # time in seconds to keep a cached version of the chart
+    credentials:              see_chart
+
+  content_chart.class:        dmContentChart    # Responsible for rendering the content chart
+  content_chart.options:
+    name:                     Activity          # public name for this chart
+    lifetime:                 43200             # time in seconds to keep a cached version of the chart
+    credentials:              see_chart
+
+  browser_chart.class:        dmBrowserChart    # Responsible for rendering the browser chart
+  browser_chart.options:
+    name:                     Browsers          # public name for this chart
+    lifetime:                 43200             # time in seconds to keep a cached version of the chart
+    credentials:              see_chart
+
+  request_log.options:
+    name:                     Requests          # public name for this chart
+    lifetime:                 43200             # time in seconds to keep a cached version of the chart
+    credentials:              see_request
+  
+  event_log.options:
+    name:                     Events            # public name for this chart
+    lifetime:                 43200             # time in seconds to keep a cached version of the chart
+    credentials:              see_event
+    
+  gapi.class:                 dmGapi            # Responsible for fetching data from google analytics
+
+  link_tag.class:             dmAdminLinkTag    # Responsible for rendering admin link tags with the £link helper
+  link_tag.options:           []
+
+  theme.options:                                # Override the core theme options
+    dir:                      themeAdmin
+    name:                     "Admin Theme"
+    enabled:                  true
+
+  asset_config.class:         dmAdminAssetConfig # Responsible for loading required assets
+
+  admin_sort_table_form.class:    dmAdminSortTableForm # Generic form to sort a table
+
+  admin_sort_referers_form.class: dmAdminSortReferersForm # Generic form to sort table's referers
+
+  layout_helper.class:        dmAdminLayoutHelper # Responsible for rendering the admin layout
+
+  admin_menu.class:           dmAdminMenu       # Responsible for building and rendering the admin menu
+
+  admin_menu_type_menu.class: dmAdminModuleTypeMenu # Responsible for building and rendering the module type menu
+
+  admin_module_space_menu.class: dmAdminModuleSpaceMenu # Responsible for building and rendering the module space menu
+    
+  xml_sitemap_generator.class:    dmXmlSitemapGenerator  # Responsible for generating and saving automatic sitemap.xml
+  xml_sitemap_generator.options:  []
+    
+  link_tag_factory.class:     dmAdminLinkTagFactory # Builds a link_tag service from a source
+
+  diem_version_check.class:   dmDiemVersionCheck # Responsible for checking if a new version is available
+  diem_version_check.options:
+    url:                      http://diem-project.org/service/current-version
+
+  log_view.class:                                 # Renders a diem log
+  log_view.log:                                   # The log to render
+  log_view.options:
+    show_ip:                  true                # whether to show users IP
+
+  page_tree_view.class:       dmAdminPageTreeView # Render the page tree
+
+  model_tree_view.class:       dmAdminModelTreeView # Render the page tree
+
+  related_records_view.class:   dmAdminRelatedRecordsView # shows a list of records related to another one
+  related_records_view.options:
+    new:                        true              # add a link to create a new related record
+    sort:                       true              # add a link to sort related records
+    max:                        3                 # max number of records to show
+
+  code_editor.class:          dmAdminCodeEditor   # Performs file operations on the project
+
+  report_anonymous_data.class: dmReportAnonymousData  # reports anonymous data about plugins used.
+  report_anonymous_data.options:                      # http://diem-project.org/plugins will show the best plugins based on these reports.
+    url:                       http://diem-project.org/service/report-anonymous-data
+
+  tool_bar_view.class:        dmAdminToolBarView  # Renders the admin toolbar
+  
+services: 
+
+  homepage_manager:
+    class:                    %homepage_manager.class%
+    shared:                   true
+    arguments:                [ @user, @service_container, @dispatcher, @helper ]
+
+  bread_crumb:
+    class:                    %bread_crumb.class%
+    shared:                   true
+    arguments:                [ @context, @i18n, @helper ]
+
+  log_chart:
+    class:                    %log_chart.class%
+    shared:                   false
+    arguments:                [ @service_container, %log_chart.options% ]
+
+  week_chart:
+    class:                    %week_chart.class%
+    shared:                   false
+    arguments:                [ @service_container, %week_chart.options% ]
+
+  browser_chart:
+    class:                    %browser_chart.class%
+    shared:                   false
+    arguments:                [ @service_container, %browser_chart.options% ]
+
+  visit_chart:
+    class:                    %visit_chart.class%
+    shared:                   false
+    arguments:                [ @service_container, %visit_chart.options% ]
+
+  content_chart:
+    class:                    %content_chart.class%
+    shared:                   false
+    arguments:                [ @service_container, %content_chart.options% ]
+
+  gapi:
+    class:                    %gapi.class%
+    shared:                   true
+    arguments:                [ @cache_manager ]
+
+  link_tag:
+    class:                    %link_tag.class%
+    shared:                   false
+    arguments:                [ %link_tag.source%, @service_container, %link_tag.options% ]
+
+  admin_sort_table_form:
+    class:                    %admin_sort_table_form.class%
+    shared:                   false
+    arguments:                [ %admin_sort_form.defaults%, %admin_sort_form.options% ]
+
+  admin_sort_referers_form:
+    class:                    %admin_sort_referers_form.class%
+    shared:                   false
+    arguments:                [ %admin_sort_form.defaults%, %admin_sort_form.options% ]
+
+  admin_menu:
+    class:                    %admin_menu.class%
+    shared:                   true
+    arguments:                [ @service_container, %menu.options% ]
+
+  admin_module_type_menu:
+    class:                    %admin_menu_type_menu.class%
+    shared:                   false
+    arguments:                [ @service_container, %menu.options% ]
+
+  admin_module_space_menu:
+    class:                    %admin_module_space_menu.class%
+    shared:                   false
+    arguments:                [ @service_container, %menu.options% ]
+
+  xml_sitemap_generator:
+    class:                    %xml_sitemap_generator.class%
+    shared:                   false
+    arguments:                [ @dispatcher, @filesystem, @i18n, %xml_sitemap_generator.options% ]
+
+  diem_version_check:
+    class:                    %diem_version_check.class%
+    shared:                   false
+    arguments:                [ @service_container, %diem_version_check.options% ]
+
+  log_view:
+    class:                    %log_view.class%
+    shared:                   false
+    arguments:                [ %log_view.log%, @i18n, @user, @helper, %log_view.options% ]
+
+  related_records_view:
+    class:                    %related_records_view.class%
+    shared:                   false
+    arguments:                [ @module_manager, @helper, @routing, @i18n, @user, %related_records_view.options% ]
+
+  code_editor:
+    class:                    %code_editor.class%
+    shared:                   false
+    arguments:                [ @filesystem, @mime_type_resolver, @file_backup ]
+
+  report_anonymous_data:
+    class:                    %report_anonymous_data.class%
+    shared:                   false
+    arguments:                [ @service_container, %report_anonymous_data.options% ]

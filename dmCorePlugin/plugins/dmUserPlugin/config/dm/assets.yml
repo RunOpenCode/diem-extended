@@ -1,0 +1,11 @@
+css:
+
+  dmUserPlugin:
+    
+    adminAuth:              adminAuth
+    myAccount:              myAccount
+
+js:
+
+  dmUserPlugin:
+    myAccount:              myAccount

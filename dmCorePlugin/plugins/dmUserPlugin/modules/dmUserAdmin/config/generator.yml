@@ -1,0 +1,51 @@
+generator:
+  class: dmAdminDoctrineGenerator
+  param:
+    model_class:           DmUser
+    theme: dmAdmin
+    non_verbose_templates: true
+    with_show:             false
+    route_prefix:          dm_user
+    with_doctrine_route:   true
+
+    config:
+      fields:
+        records_list: 
+          label: Records Permissions
+        groups_list:
+          label: Groups
+        permissions_list:
+          label: Permissions
+        is_active:
+          label: Active
+        is_super_admin:
+          label: 'Super admin'
+        password_again: { label: "Password (again)" }
+      filter:
+        display:
+          - username
+          - email
+          - password
+          - is_active
+          - is_super_admin
+      list:
+        display:
+          - =username
+          - email
+          - is_active
+          - is_super_admin
+          - last_login
+          - created_at
+          - updated_at
+        sort:
+          - username
+          - asc
+        table_method: getAdminListQuery
+        table_count_method: ~
+        loremize: false
+      form:
+        display:
+          NONE: [id, username, email, password, password_again, is_active, is_super_admin]
+          "Groups & Permissions": [groups_list, permissions_list]
+          "Records Permissions": [records_list]
+        class: DmUserAdminForm

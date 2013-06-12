@@ -1,0 +1,19 @@
+config/factories.yml:
+  class:          dmFactoryConfigHandler
+  
+config/dm/modules.yml:
+  class:          dmAdminModuleManagerConfigHandler
+  
+config/dm/config.yml:
+  class:          sfDefineEnvironmentConfigHandler
+  param:
+    prefix:       dm_
+    
+config/dm/assets.yml:
+  class:          dmInlineAssetConfigHandler
+  
+config/routing.yml:
+  class:          dmAdminRoutingConfigHandler
+  
+config/dm/widget_types.yml:
+  class:          sfSimpleYamlConfigHandler

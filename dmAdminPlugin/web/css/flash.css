@@ -1,0 +1,33 @@
+#flash, div.dm_active_locks {
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+#flash li.flash,
+div.dm_active_locks span {
+  border: 1px solid;
+  padding: 5px;
+  margin-top: 5px;
+  color: #333;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  display: block;
+}
+
+#flash li.info {
+  background: #DFE9B8 url(../images/flash/green.gif) repeat-x top left;
+  border-color: #CAD3A6;
+}
+
+#flash li.alert {
+  background: #F8F2B7 url(../images/flash/yellow.gif) repeat-x top left;
+  border-color: #DBD6A1;
+}
+
+#flash li.error,
+div.dm_active_locks span {
+  background: #F6DCD9 url(../images/flash/red.gif) repeat-x top left;
+  border-color: #D7BBB8;
+  color: #DD0000;
+}

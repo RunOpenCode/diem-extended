@@ -1,0 +1,53 @@
+default:
+        
+  module_manager:
+    class:                  dmModuleManager
+    param:
+      type_class:           dmModuleType
+      space_class:          dmModuleSpace
+      module_base_class:    dmModule
+      module_node_class:    dmProjectModule
+
+  i18n:
+    class:                  dmFrontI18n
+    param:
+      database:             default
+      source:               dm
+      debug:                false
+      cache:
+        class:              dmMetaCache
+
+  routing:
+    class:                  dmFrontRouting
+    param:
+      segment_separators:   [ '/' ]
+      cache:
+        class:              dmMetaCache
+        param:
+          automatic_cleaning_factor: 0
+          cache_dir:                 %SF_CONFIG_CACHE_DIR%/routing
+          lifetime:                  31556926
+          prefix:                    %SF_APP_DIR%/routing
+
+  request:
+    class:                  dmWebRequest
+    
+  controller:
+    class:                  dmFrontWebController
+
+  response:
+    class:                  dmWebResponse
+    
+  logger:
+    param:
+      loggers:
+        sf_web_debug:
+          param:
+            xdebug_logging: false
+            web_debug_class: dmFrontWebDebug
+ 
+  view_cache:
+    class:                  dmMetaCache
+    
+  storage: 
+    class: dmSessionStorage

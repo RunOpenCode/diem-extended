@@ -1,0 +1,31 @@
+default:
+
+  accessibility:
+    image_empty_alts:     true                    # add an empty alt to images without alt attribute
+    
+  html:
+    doctype:
+      name:               html                    # Doctype ( 'html', 'xhtml' )
+      version:            5                       # Doctype xhtml version ( '1.0', '1.1' ) or html version ( '4', '5' )
+      compliance:         transitional            # Doctype (x)html compliance ( 'strict', 'transitional' )
+
+  i18n:
+    catalogue:            front
+    
+  pageBar:
+    enabled:              true
+    
+  mediaBar:
+    enabled:              true
+
+  service:                                            # Dependency Injection Container configuration
+    container_base_class: dmFrontBaseServiceContainer # The service container base class
+  
+
+  page_cache:                                         # Diem Extended on steroids - cache page output to file
+    enabled: true                                     # Or, if page has some dynamic widgets, everything but those widgets
+    max_pool_size:  1000                              # Maximum number of cached pages in cache (security) 
+
+dev:
+  page_cache:
+    enabled: false

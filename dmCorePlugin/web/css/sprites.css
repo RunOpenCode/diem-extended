@@ -1,0 +1,40 @@
+.s16, .s16block, .s16right,
+.dm .s16, .dm .s16block, .dm .s16right {
+  background-color: transparent !important;
+  background-image: url(../images/16/sprite.png) !important;
+  background-repeat: no-repeat !important;
+  height: 16px;
+}
+.s16,
+.dm .s16 {
+  padding-left: 18px !important;
+}
+.s16block,
+.dm .s16block {
+  width: 16px;
+  display: block !important;
+  font-size: 0 !important;
+}
+
+.s16block.s16_none,
+.dm .s16block.s16_none {
+  background: transparent;
+}
+
+.s24, .s24block, .s24right,
+.dm .s24, .dm .s24block, .dm .s24right {
+  background-color: transparent !important;
+  background-image: url(../images/24/sprite.png) !important;
+  background-repeat: no-repeat !important;
+  height: 24px;
+}
+.s24,
+.dm .s24 {
+  padding-left: 28px;
+}
+.s24block,
+.dm .s24block {
+  width: 24px;
+  display: block !important;
+  font-size: 0 !important;
+}

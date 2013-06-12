@@ -1,0 +1,57 @@
+js:
+
+  admin:
+    ctrl:             dmAdminCtrl
+    form:             dmAdminForm
+    toolBar:          dmAdminToolBar
+    pageBar:          dmAdminPageBar
+    mediaBar:         dmAdminMediaBar
+    media:            dmAdminMediaCtrl
+    console:          dmAdminConsole
+    codeEditor:       dmAdminCodeEditor
+    seoValidation:    dmAdminSeoValidationCtrl
+    sort:             dmAdminSortCtrl
+    log:              dmAdminLog
+    logs:             dmAdminLogs
+    configPanel:      dmAdminConfigPanel
+    chart:            dmAdminChart
+    autoSeo:          dmAdminAutoSeo
+    manualSeo:        dmAdminManualSeo
+    gallery:          dmAdminGalleryCtrl
+    history:          dmAdminHistoryCtrl
+    sitemap:          dmAdminSitemap
+    diagram:          dmAdminDiagram
+    ping:             dmAdminPing
+    pageTree:         dmAdminPageTree
+    modelTree:        dmAdminModelTree
+    catalogue:        dmAdminCatalogue
+    fancyboxLaunch:   dmAdminImageFancyBoxLauncher
+    mailTemplate:     dmAdminMailTemplate
+
+css:
+
+  admin:
+    main:             main
+    layout:           layout
+    bars:             bars
+    breadCrumb:       breadCrumb
+    flash:            flash
+    list:             list
+    form:             form
+    filter:           filter
+    verticalBar:      verticalBar
+    media:            media
+    console:          console
+    codeEditor:       codeEditor
+    seoValidation:    seoValidation
+    sort:             sort
+    log:              log
+    configPanel:      configPanel
+    dataTable:        dataTable
+    seoService:       seoService
+    moduleSpace:      moduleSpace
+    autoSeo:          autoSeo
+    manualSeo:        manualSeo
+    gallery:          gallery
+    history:          history
+    embed:            embed

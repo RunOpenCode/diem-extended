@@ -1,0 +1,375 @@
+# PAGE SCHEMA
+
+DmPage:
+  actAs:
+    NestedSet:
+    I18n:
+      fields:               [slug, name, title, h1, description, keywords, auto_mod, is_active, is_secure, is_indexable, is_static]
+      length:               7
+  columns:
+    module:                 { type: string(127), notnull: true }
+    action:                 { type: string(127), notnull: true }
+    record_id:              { type: integer, unsigned: true, notnull: true, default: 0 }
+    slug:                   { type: string(255), notnull: true }
+    name:                   { type: string(255), notnull: true }
+    title:                  { type: string(255), notnull: false }
+    h1:                     { type: string(255), notnull: false }
+    description:            { type: string(255), notnull: false }
+    keywords:               { type: string(255), notnull: false }
+    auto_mod:               { type: string(6), notnull: true, default: 'snthdk' } # slug, name, title, h1, description, keywords
+    is_active:              { type: boolean, notnull: true, default: true }
+    is_secure:              { type: boolean, notnull: true, default: false } # requires authentication
+    credentials:            { type: string(255), notnull: false }
+    is_indexable:           { type: boolean, notnull: true, default: true }
+    is_static:              { type: boolean, notnull: true, default: false } # this page can be cached? 
+  indexes:
+    recordModuleAction:
+      fields:               [ module, action, record_id ]
+      type:                 unique
+
+DmPageView:
+  columns:
+    module:                 { type: string(127), notnull: true }
+    action:                 { type: string(127), notnull: true }
+    dm_layout_id:           { type: integer }
+  indexes:
+    dmPageViewModuleAction:
+      fields:               [ module, action ]
+      type:                 unique
+  relations:
+    Layout:
+      class:                DmLayout
+      local:                dm_layout_id
+      foreign:              id
+      onDelete:             SET NULL
+      foreignAlias:         PageViews
+
+DmLayout:
+  columns:
+    name:                   { type: string(255), notnull: true, unique: true }
+    template:               { type: string(255), notnull: true, default: "page" }
+    css_class:              { type: string(255) }
+
+DmArea:
+  columns:
+    dm_layout_id:           { type: integer, notnull: false }
+    dm_page_view_id:        { type: integer, notnull: false }
+    type:                   { type: string(255), notnull: true }
+  relations:
+    Layout:
+      class:                DmLayout
+      local:                dm_layout_id
+      foreign:              id
+      foreignAlias:         Areas
+      onDelete:             CASCADE
+    PageView:
+      class:                DmPageView
+      local:                dm_page_view_id
+      foreign:              id
+      foreignAlias:         Areas
+      onDelete:             CASCADE
+
+DmZone:
+  actAs:                    [ Sortable ]
+  columns:
+    dm_area_id:             { type: integer, notnull: true }
+    css_class:              { type: string(255) }
+    width:                  { type: string(15) }
+  relations:
+    Area:
+      class:                DmArea
+      local:                dm_area_id
+      foreign:              id
+      foreignAlias:         Zones
+      onDelete:             CASCADE
+  
+DmWidget:
+  actAs:
+    Sortable:               {}
+    Timestampable:
+      created:
+        disabled: true
+    I18n:
+      fields:               [ value ]
+      length:               7
+  columns:
+    dm_zone_id:             { type: integer, notnull: true }
+    module:                 { type: string(127), notnull: true }
+    action:                 { type: string(127), notnull: true }
+    value:                  { type: string(60000) }
+    css_class:              { type: string(255) }
+  relations:
+    Zone:
+      class:                DmZone
+      local:                dm_zone_id
+      foreign:              id
+      foreignAlias:         Widgets
+      onDelete:             CASCADE
+
+# MEDIA SCHEMA
+
+DmMediaFolder:
+  options:
+    symfony:
+      filter: false
+  actAs:                    [ NestedSet ]
+  columns:
+    rel_path:               { type: string(255), notnull: true, unique: true }
+
+DmMedia:
+  options:
+    symfony:
+      filter: false
+  actAs:
+    I18n:
+      fields:         [ legend, author, license ]
+    Timestampable:          {}
+  columns:
+    dm_media_folder_id:     { type: integer, notnull: true }
+    file:                   { type: string(255), notnull: true }
+    legend:                 { type: string(255) }
+    author:                 { type: string(255) }
+    license:                { type: string(255) }
+    mime:                   { type: string(128), notnull: true }
+    size:                   { type: integer(4), unsigned: true }
+    dimensions:             { type: string(15) }
+  relations:
+    Folder:
+      class:                DmMediaFolder
+      onDelete:             CASCADE
+      foreignAlias:         Medias
+  indexes:
+    folderFile:
+      fields:               [ dm_media_folder_id, file ]
+      type:                 unique
+
+# LOG SCHEMA
+
+DmError:
+  actAs:
+    Timestampable:
+      updated:
+        disabled: true
+  columns:
+    php_class:              { type: string(127), notnull: true }
+    name:                   { type: string(255), notnull: true }
+    description:            { type: string(60000) }
+    module:                 { type: string(127), notnull: false }
+    action:                 { type: string(127), notnull: false }
+    uri:                    { type: string(255), notnull: true }
+    env:                    { type: string(63), notnull: true }
+
+DmLock:
+  options:
+    symfony:
+      form:   false
+      filter: false
+  columns:
+    user_id:                { type: integer, notnull: true }
+    user_name:              { type: string(255), notnull: true }
+    module:                 { type: string(127), notnull: true }
+    action:                 { type: string(127), notnull: true }
+    record_id:              { type: integer, unsigned: true, notnull: true, default: 0 }
+    time:                   { type: integer, notnull: true }
+    app:                    { type: string(127), notnull: true }
+    url:                    { type: string(255), notnull: true }
+    culture:                { type: string(15), notnull: true }
+  indexes:
+    dmLockIndex:
+      fields:               [ user_id, module, action, record_id ]
+      type:                 unique
+  relations:
+    User:
+      class:                DmUser
+      local:                user_id
+      onDelete:             CASCADE
+
+# SEO SCHEMA
+
+DmAutoSeo:
+  actAs:
+    Timestampable:
+    I18n:
+      fields:               [ slug, name, title, h1, description, keywords, strip_words ]
+      length:               7
+  columns:
+    module:                 { type: string(127), notnull: true }
+    action:                 { type: string(127), notnull: true }
+    slug:                   { type: string(255), notnull: true }
+    name:                   { type: string(255), notnull: true }
+    title:                  { type: string(255), notnull: true }
+    h1:                     { type: string(255), notnull: false }
+    description:            { type: string(255), notnull: false }
+    keywords:               { type: string(255), notnull: false }
+    strip_words:            { type: string(10000) }
+  indexes:
+    dmAutoSeoModuleAction:
+      fields:               [ module, action ]
+      type:                 unique
+
+DmRedirect:
+  actAs:                    [Timestampable]
+  columns:
+    source:                 { type: string(255), unique: true, notnull: true }
+    dest:                   { type: string(255), notnull: true }
+
+# SETTING SCHEMA
+
+DmSetting:
+  actAs:
+    I18n:
+      fields:               [ description, value, default_value ]
+      length:               7
+  columns:
+    name:                   { type: string(127), notnull: true, unique: true }
+    description:            { type: string(255) }
+    type:                   { type: enum, notnull: true, values: [text, boolean, select, textarea, number, integer, datetime], default: 'text' }
+    value:                  { type: string(60000) }
+    params:                 { type: string(60000) }
+    group_name:             { type: string(255), notnull: true, default: '' }
+    default_value:          { type: string(60000), default: '' }
+    credentials:            { type: string(255) }
+
+# TRANSLATION SCHEMA
+
+DmCatalogue:
+  columns:
+    name:                   { type: string(255), notnull: true }
+    source_lang:            { type: string(15), notnull: true }
+    target_lang:            { type: string(15), notnull: true }
+    
+DmTransUnit:
+  actAs:                    [ Timestampable ]
+  columns:
+    dm_catalogue_id:        { type: integer, notnull: true }
+    source:                 { type: string(60000), notnull: true }
+    target:                 { type: string(60000), notnull: true }
+    meta:                   { type: string(255) }
+  relations:
+    DmCatalogue:
+      onDelete:             CASCADE
+      foreignAlias:         Units
+
+DmMailTemplate:
+  actAs:
+    Timestampable:
+    I18n:
+      fields:               [ subject, description, body, from_email, to_email, cc_email, bcc_email, reply_to_email, sender_email, list_unsuscribe, is_html, is_active ]
+      length:               7
+  columns:
+    name:                   { type: string(255), notnull: true, unique: true }
+    description:            { type: string(5000) }
+    vars:                   { type: string(5000) }
+    subject:                { type: string(5000), notnull: true }
+    body:                   { type: clob, notnull: true }
+    from_email:             { type: string(5000), notnull: true }
+    to_email:               { type: string(5000) }
+    cc_email:               { type: string(5000) }
+    bcc_email:              { type: string(5000) }
+    reply_to_email:         { type: string(5000) }
+    sender_email:           { type: string(5000) }
+    list_unsuscribe:        { type: string(5000) }
+    is_html:                { type: boolean, notnull: true, default: false }
+    is_active:              { type: boolean, notnull: true, default: true }
+    dm_mail_decorator_id:   { type: integer, notnull: false }
+  relations:
+    Decorator:
+      class:                DmMailDecorator
+      local:                dm_mail_decorator_id
+      onDelete:             SET NULL
+      foreignAlias:         MailTemplates
+
+DmMailDecorator:
+  actAs:
+    Timestampable:
+    I18n:
+      fields:               [ template, is_active ]
+      length:               7
+  columns:
+    name:                   { type: string(255), notnull: true, unique: true }
+    template:               { type: string(5000), notnull: true }
+    is_active:              { type: boolean, notnull: true, default: true }
+
+DmSentMail:
+  actAs:
+    Timestampable:
+      updated:
+        disabled: true
+  columns:
+    dm_mail_template_id:    { type: integer }
+    subject:                { type: string(5000), notnull: true }
+    body:                   { type: clob, notnull: true }
+    from_email:             { type: string(5000), notnull: true }
+    to_email:               { type: string(5000) }
+    cc_email:               { type: string(5000) }
+    bcc_email:              { type: string(5000) }
+    reply_to_email:         { type: string(5000) }
+    sender_email:           { type: string(5000) }
+    strategy:               { type: string(255) }
+    transport:              { type: string(255) }
+    culture:                { type: string(16) }
+    debug_string:           { type: clob }
+  relations:
+    Template:
+      class:                DmMailTemplate
+      local:                dm_mail_template_id
+      onDelete:             SET NULL
+      foreignAlias:         SentMails
+
+# BEHAVIORS SCHEMA
+
+DmBehavior:
+  actAs:
+    Sortable:               {}
+    Timestampable:
+      created:
+        disabled: true
+    I18n:
+      fields:               [ dm_behavior_value, dm_behavior_enabled ]
+      length:               7
+  columns:
+    # Each behavior should have its unique key
+    dm_behavior_key:                    { type: string(255), notnull: true }
+    
+    # For translation purposes, behaviors can be disabled
+    dm_behavior_enabled:                { type: boolean, notnull: true, default: true }
+    
+    # Behaviors can be attached to page, zone, widget or some content inside page, zone or widget 
+    dm_behavior_attached_to:            { type: enum, values: [page, area, zone, widget], notnull: true }
+        
+    # so the selector should be "dm_container_id content_id", per example: dm_widget_5 some_dom_elem_10 - it will target the content inside the widget
+    dm_behavior_attached_to_selector:   { type: string(255), notnull: true, default: null }
+
+    # This is where we store the settings for the behavior
+    dm_behavior_value:                  { type: string(60000) }
+    
+    # Main DIEM containers for which behavior will be attached
+    dm_page_id:                         { type: integer, notnull: false}
+    dm_area_id:                         { type: integer, notnull: false}
+    dm_zone_id:                         { type: integer, notnull: false}
+    dm_widget_id:                       { type: integer, notnull: false}
+  relations:
+    Page:
+      class:                DmPage
+      local:                dm_page_id
+      foreign:              id
+      foreignAlias:         Behaviors
+      onDelete:             CASCADE 
+    Area:
+      class:                DmArea
+      local:                dm_area_id
+      foreign:              id
+      foreignAlias:         Behaviors
+      onDelete:             CASCADE 
+    Zone:
+      class:                DmZone
+      local:                dm_zone_id
+      foreign:              id
+      foreignAlias:         Behaviors
+      onDelete:             CASCADE 
+    Widget:
+      class:                DmWidget
+      local:                dm_widget_id
+      foreign:              id
+      foreignAlias:         Behaviors
+      onDelete:             CASCADE 

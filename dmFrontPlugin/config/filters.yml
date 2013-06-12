@@ -1,0 +1,13 @@
+rendering:    ~
+
+remember_me:
+  class:      dmRememberMeFilter
+  
+security:     ~
+
+dm_init:
+  class:      dmFrontInitFilter
+
+cache:        ~
+
+execution:    ~

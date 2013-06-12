@@ -1,0 +1,175 @@
+DmTestUser:
+  columns:
+    name:                   { type: string(255), notnull: false }
+    description:            { type: clob, extra: markdown }
+    media_id:               { type: integer, notnull: false }
+    is_visible:             { type: boolean, notnull: true, default: false }
+  relations:
+    Media:
+      class:                DmMedia
+      local:                media_id
+      onDelete:             SET NULL
+
+DmTestDomain:
+  actAs:
+    Timestampable:
+    Sortable:
+    I18n:
+      fields:         [ title, is_active ]
+      length:         7
+      actAs:
+        DmBlameable:
+    DmTaggable:
+  columns:  
+    title:            { type: string(255), notnull: true }  
+    is_active:        { type: boolean, notnull: true, default: true }
+  relations:
+    Categs:
+      class:          DmTestCateg
+      refClass:       DmTestDomainCateg
+      local:          domain_id
+      foreign:        categ_id
+      
+DmTestDomainCateg:
+  options:
+    symfony:
+      form:           false
+      filter:         false
+  columns:
+    domain_id:        { type: integer, primary: true }
+    categ_id:         { type: integer, primary: true }
+  relations:
+    Domain:
+      local:          domain_id
+      class:          DmTestDomain
+      onDelete:       CASCADE
+    Categ:
+      local:          categ_id
+      class:          DmTestCateg
+      onDelete:       CASCADE
+
+DmTestCateg:
+  actAs:
+    Timestampable:
+    Sortable:
+    I18n:
+      fields:         [ name, is_active ]
+      length:         7
+  columns:  
+    name:             { type: string(255), notnull: true }
+    is_active:        { type: boolean, notnull: true, default: true }
+  relations:
+    Domains:
+      class:          DmTestDomain
+      refClass:       DmTestDomainCateg
+      local:          categ_id
+      foreign:        domain_id
+
+DmTestPost:
+  actAs:
+    Timestampable:
+    Sortable:
+    DmGallery:
+    I18n:
+      fields:         [ title, excerpt, body, url, is_active ]
+      length:         7
+      actAs:
+        DmVersionable:
+          fields:     ~
+  columns:
+    categ_id:         { type: integer, notnull: true }
+    user_id:          { type: integer, notnull: true }
+    title:            { type: string(255), notnull: true }  
+    excerpt:          { type: string(800) }  
+    body:             { type: clob, extra: markdown }
+    url:              { type: string(255), extra: link }
+    image_id:         { type: integer }
+    file_id:          { type: integer }
+    date:             { type: date, notnull: true }
+    created_by:       { type: integer }
+    is_active:        { type: boolean, notnull: true, default: true }
+  relations:  
+    Categ:
+      local:          categ_id
+      class:          DmTestCateg
+      onDelete:       CASCADE
+      foreignAlias:   Posts
+    Author:
+      class:          DmUser
+      local:          user_id
+      foreignAlias:   Posts
+      onDelete:       CASCADE
+    Image:  
+      class:          DmMedia  
+      local:          image_id
+    File:  
+      class:          DmMedia  
+      local:          file_id
+    Tags:
+      class:          DmTestTag
+      refClass:       DmTestPostTag
+      local:          post_id
+      foreign:        tag_id
+    CreatedBy:
+      class:          DmUser
+      local:          created_by
+      foreignAlias:   DmTestPosts
+      onDelete:       SET NULL
+      
+DmTestPostTag:
+  options:
+    symfony:
+      form:           false
+      filter:         false
+  columns:
+    post_id:          { type: integer, primary: true }
+    tag_id:           { type: integer, primary: true }
+  relations:
+    Post:
+      local:          post_id
+      class:          DmTestPost
+      onDelete:       CASCADE
+    Tag:
+      local:          tag_id
+      class:          DmTestTag
+      onDelete:       CASCADE
+      
+DmTestTag:
+  actAs:
+    Timestampable:
+    I18n:
+      fields:         [ name, slug ]
+      length:         7
+  columns:
+    name:             { type: string(255), notnull: true }
+    slug:             { type: string(255), notnull: true, unique: true }
+  relations:
+    Posts:
+      class:          DmTestPost
+      refClass:       DmTestPostTag
+      local:          tag_id
+      foreign:        post_id
+
+DmTestComment:  
+  actAs:
+    Timestampable:
+    DmVersionable:
+      fields:         ~
+  columns:  
+    post_id:          { type: integer, notnull: true }  
+    author:           { type: string(255) }  
+    body:             { type: clob }  
+    is_active:        { type: boolean, notnull: true, default: true }
+  relations:  
+    Post:  
+      class:          DmTestPost
+      local:          post_id
+      foreignAlias:   Comments  
+      onDelete:       CASCADE
+
+DmTestFruit:
+  actAs:
+    DmTaggable:
+    DmBlameable:
+  columns:  
+    title:            { type: string(255) }

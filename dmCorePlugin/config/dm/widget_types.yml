@@ -1,0 +1,40 @@
+dmWidgetContent:
+
+# To customize widgets forms and views
+# copy this file to your project config/dm path
+# and set the form_class and view_class values.
+# Example :
+# title:
+#   form_class:         myWidgetTitleForm
+#   view_class:         myWidgetTitleView
+#   cache:              true
+
+  title:
+    cache:              static
+
+  link:
+    cache:              true
+
+  text:
+    cache:              true
+
+  image:
+    cache:              true
+    
+dmWidgetNavigation:
+
+  breadCrumb:
+    cache:              true
+
+  menu:
+    cache:              true
+    
+dmWidgetSearch:
+    
+  form:
+    cache:              true
+    public_name:        Search form
+    
+  results:
+    cache:              false
+    public_name:        Search results

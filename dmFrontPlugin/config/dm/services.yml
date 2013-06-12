@@ -1,0 +1,201 @@
+parameters:
+
+  page_routing.class:         dmPageRouting         # Responsible for building a page_route from a slug.
+  page_routing.options:       []
+
+  html_sitemap.class:         dmFrontHtmlSitemap    # Responsible for building and rendering an HTML sitemap. Not to be confused with the xml sitemap, the HTML one is intended to be displayed on the site.
+
+  page_not_found_handler.class: dmPageNotFoundHandler # Responsible to redirect or forward the user when the request page is not found.
+
+  form_manager.class:         dmFormManager         # Responsible for creating and managing front forms.
+
+  link_tag_record.class:      dmFrontLinkTagRecord  # Responsible for rendering a link tag to a record with the £link helper. Configurable from the graphical configuration panel.
+  link_tag_record.options:    []
+  
+  link_tag_page.class:        dmFrontLinkTagPage    # Responsible for rendering a link tag to a DmPage instance with the £link helper. Configurable from the graphical configuration panel.
+  link_tag_page.options:      []
+  
+  link_tag_media.class:       dmFrontLinkTagMedia   # Responsible for rendering a link tag to a DmMedia instance with the £link helper. Configurable from the graphical configuration panel.
+  link_tag_media.options:     []
+  
+  link_tag_action.class:      dmFrontLinkTagAction  # Responsible for rendering a link tag to a symfony action with the £link helper. Configurable from the graphical configuration panel.
+  link_tag_action.options:    []
+  
+  link_tag_uri.class:         dmFrontLinkTagUri     # Responsible for rendering a link tag to an external uri with the £link helper. Configurable from the graphical configuration panel.
+  link_tag_uri.options:       []
+
+  link_tag_route.class:       dmFrontLinkTagRoute   # Responsible for rendering a link tag to a symfony parametered route with the £link helper. Configurable from the graphical configuration panel.
+  link_tag_route.options:     []
+  
+  link_tag_error.class:       dmFrontLinkTagError   # Responsible for rendering a link tag to an exception with the £link helper. Configurable from the graphical configuration panel.
+  link_tag_error.options:     []
+
+  link_resource.class:        dmFrontLinkResource   # Ressource for a link_tag_*.
+    
+  link_tag_factory.class:     dmFrontLinkTagFactory # Builds a link_tag service from a source
+
+  asset_config.class:         dmFrontAssetConfig    # Responsible for loading required assets.
+
+  theme_manager.class:        dmThemeManager        # Responsible for managing available themes.
+
+  widget_view.class:          dmWidgetBaseView      # Responsible for rendering a widget.
+
+  layout_helper.class:        dmFrontLayoutHelper   # Responsible for rendering the front layout.
+
+  page_helper.class:          dmFrontPageBaseHelper # Responsible for rendering the front content.
+  page_helper.view_class:     dmFrontPageViewHelper # Simple rendering for normal users
+  page_helper.edit_class:     dmFrontPageEditHelper # Edit rendering for user who can modify the site
+  page_helper.options:
+    widget_css_class_pattern: %%module%%_%%action%% # Widget css class generation pattern.
+                                                    # Available variables : module, action.
+                                                    # Can be let empty to disable automatic widget classes
+  
+  widget_renderer.class:      dmFrontWidgetRenderer # Responsible for rendering widgets
+    
+  zone_form.class:            DmZoneFrontForm       # Form used when displaying a zone edition dialog
+
+  front_add_menu.class:       dmFrontAddMenu        # Responsible for building and rendering the front add menu
+  
+  front_behaviors_menu.class: dmFrontBehaviorsAddMenu # Responsible for building and rendering the front add behaviors menu
+
+  front_code_editor_file_menu.class: dmFrontCodeEditorFileMenu # Responsible for building and rendering the front code editor file menu
+
+  front_clipboard.class:      dmFrontUserClipboard  # Responsible for storing copyied and cutted zones and widgets
+
+  front_pager_view.class:     dmFrontPagerView      # Responsible for rendering a sfPager with pagination links
+  front_pager_view.options:   []
+
+  sitemap_menu.class:         dmSitemapMenu         # Automate HTML sitemaps with dmMenu
+
+  page_tree_view.class:       dmFrontPageTreeView   # Render the page tree
+
+  helper_extension.class:     dmFrontHelperExtension # Adds methods to the helper service
+
+  tool_bar_view.class:        dmFrontToolBarView    # Renders the front toolbar
+  
+  page_cache.class:           dmPageCache           # Caches pages into single file
+
+services:
+
+  page_routing:
+    class:                    %page_routing.class%
+    shared:                   true
+    arguments:                [ @service_container, %page_routing.options% ]
+
+  html_sitemap:
+    class:                    %html_sitemap.class%
+    arguments:                [ @helper, %user.culture% ]
+
+  page_not_found_handler:
+    class:                    %page_not_found_handler.class%
+    shared:                   false
+    arguments:                [ @service_container, @dispatcher ]
+
+  form_manager:
+    class:                    %form_manager.class%
+    arguments:                [ @service_container, @dispatcher ]
+    shared:                   true
+
+  link_tag_record:
+    class:                    %link_tag_record.class%
+    shared:                   false
+    arguments:                [ %link_tag.resource%, %request.context%, %context.page%, @user, %link_tag_record.options% ]
+
+  link_tag_page:
+    class:                    %link_tag_page.class%
+    shared:                   false
+    arguments:                [ %link_tag.resource%, %request.context%, %context.page%, @user, %link_tag_page.options% ]
+
+  link_tag_media:
+    class:                    %link_tag_media.class%
+    shared:                   false
+    arguments:                [ %link_tag.resource%, %request.context%, %link_tag_media.options% ]
+
+  link_tag_action:
+    class:                    %link_tag_action.class%
+    shared:                   false
+    arguments:                [ %link_tag.resource%, @controller, %request.context%, %link_tag_action.options% ]
+
+  link_tag_uri:
+    class:                    %link_tag_uri.class%
+    shared:                   false
+    arguments:                [ %link_tag.resource%, @controller, %request.context%, %link_tag_uri.options% ]
+
+  link_tag_route:
+    class:                    %link_tag_route.class%
+    shared:                   false
+    arguments:                [ %link_tag.resource%, @controller, @routing, %request.context%, %link_tag_uri.options% ]
+
+  link_tag_error:
+    class:                    %link_tag_error.class%
+    shared:                   false
+    arguments:                [ %link_tag.resource%, %request.context%, %link_tag_error.options% ]
+
+  link_resource:
+    class:                    %link_resource.class%
+    shared:                   false
+
+  theme_manager:
+    class:                    %theme_manager.class%
+    shared:                   true
+    arguments:                [ @dispatcher, @service_container, %theme_manager.options% ]
+
+  widget_view:
+    class:                    %widget_view.class%
+    shared:                   false
+    arguments:                [ @context, %widget_view.type%, %widget_view.data% ]
+
+  page_helper:
+    class:                    %page_helper.class%
+    shared:                   true
+    arguments:                [ @dispatcher, @service_container, @helper, %page_helper.options% ]
+    
+  widget_renderer:
+    class:                    %widget_renderer.class%
+    shared:                   false
+    arguments:                [ @dispatcher, @service_container, %widget_renderer.widget% ]
+    
+  zone_form:
+    class:                    %zone_form.class%
+    shared:                   false
+    arguments:                [ %zone_form.object% ]
+
+  front_add_menu:
+    class:                    %front_add_menu.class%
+    shared:                   true
+    arguments:                [ @service_container, %menu.options% ]
+  
+  behaviors_add_menu:
+    class:                    %front_behaviors_menu.class%
+    shared:                   true
+    arguments:                [ @service_container, %menu.options% ]
+
+  front_code_editor_file_menu:
+    class:                    %front_code_editor_file_menu.class%
+    shared:                   true
+    arguments:                [ @service_container, %menu.options% ]
+
+  front_clipboard:
+    class:                    %front_clipboard.class%
+    shared:                   true
+    arguments:                [ @user ]
+
+  front_pager_view:
+    class:                    %front_pager_view.class%
+    shared:                   false
+    arguments:                [ @context, %front_pager_view.options% ]
+
+  sitemap_menu:
+    class:                    %sitemap_menu.class%
+    shared:                   false
+    arguments:                [ @service_container, %menu.options% ]
+
+  helper_extension:
+    class:                    %helper_extension.class%
+    shared:                   true
+    arguments:                [ @dispatcher, @service_container ]
+
+  page_cache:
+    class:                    %page_cache.class%
+    shared:                   true
+    arguments:                [ @context, @dispatcher, @filesystem ]

@@ -1,0 +1,14 @@
+div.seo_service {
+  padding: 40px;
+  text-align: center;
+}
+
+div.seo_service form {
+  text-align: left;
+}
+
+div.seo_service form .dm_help_wrap {
+  color: #666;
+  font-style: italic;
+  margin-left: 30%;
+}

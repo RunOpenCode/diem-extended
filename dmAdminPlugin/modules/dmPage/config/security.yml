@@ -1,0 +1,14 @@
+all:
+  credentials: [ manage_pages, manual_metas ]
+
+reorderPages:
+  credentials: [ manage_pages ]
+
+move:
+  credentials: [ manage_pages ]
+
+manageMetas:
+  credentials: [ manual_metas ]
+
+tableTranslations:
+  credentials: [ manual_metas ]

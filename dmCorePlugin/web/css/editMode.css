@@ -1,0 +1,96 @@
+.dm .ui-widget-header {
+  background: url(../images/default_bg.png) center center repeat-x;
+  border-color: #bbb;
+}
+
+.dm_menu .ui-widget a, .dm_menu .ui-widget span {
+  font-family: Verdana,Arial,sans-serif;
+}
+
+.blockUI.blockMsg.blockElement {
+  width:          48px;
+  height:         48px;
+  top:            40%;
+  left:           35%;
+  color:          #ddd;
+  border:         3px solid #aaa;
+  background:     #fff url(../images/48/loader.gif) 10px 10px no-repeat;
+  cursor:         wait;
+  padding:        10px;
+  border-radius: 48px;
+  -moz-border-radius: 48px;
+  -webkit-border-radius: 48px;
+  opacity:        0.7;
+}
+
+.blockUI.blockMsg.blockPage {
+  cursor:         wait;
+  width:          100%;
+  text-align:     center;
+  top:            30%;
+}
+
+.blockUI.blockMsg.blockPage > div.blockUIWrap {
+  width:         400px;
+  margin:        auto;
+  color:          #000;
+  border:         1px solid #aaa;
+  background:     url(../images/default_bg.png) center repeat-x;
+  cursor:         wait;
+  padding:        10px;
+  cursor:         wait;
+  padding:        10px;
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  box-shadow: 5px 5px 10px #444;
+  -moz-box-shadow: 5px 5px 10px #444;
+  -webkit-box-shadow: 5px 5px 10px #444;
+}
+
+.blockUI.blockOverlay {
+  background:     #444;
+  opacity:        0.2;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  cursor:         wait;
+}
+
+#ui-datepicker-div {
+  z-index: 1010;
+}
+
+ul.ui-tabs-nav > li.dm_error {
+  background-image: url(../images/default_bg_red.png);
+  border-color: #BE1111;
+}
+
+ul.ui-tabs-nav > li.dm_error a {
+  color: #BE1111;
+}
+
+ul.ui-tabs-nav > li.dm_error.ui-tabs-selected {
+   background: #fff;
+}
+
+.dm .ui-state-default, .dm .ui-widget-content .ui-state-default {
+  background-image: url(../images/default_bg.png);
+}
+
+.dm .ui-state-default, .dm .ui-widget-content .ui-state-default.ui-state-active {
+  background: #fff;
+}
+
+#dm_error_dialog {
+	border: 3px solid red;
+}
+
+#dm_error_dialog div.ui-dialog-content {
+  max-height: 400px;
+  overflow: auto !important;
+}
+
+body > div.tipsy {
+  font-family: Verdana,Arial,sans-serif;
+}

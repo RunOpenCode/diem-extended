@@ -1,0 +1,86 @@
+Tools:
+  Configuration:
+    dmConfigPanel:
+      name:         Configuration panel
+      credentials:  config_panel
+    dmMailTemplate:
+      name:         Mail template
+      credentials:  mail_template
+    dmMailDecorator:
+      name:         Mail template decorator
+      credentials:  mail_template
+    dmLayout:
+      name:         Layout
+      credentials:  layout
+  Translation:
+    dmTransUnit:
+      name:         Sentence
+      credentials:  translation
+    dmCatalogue:
+      name:         Catalogue
+      credentials:  system
+  Monitoring:
+    dmChart:
+      name:         Chart
+      credentials:  see_chart
+    dmLog:
+      name:         Log
+      credentials:  see_log
+  Media:
+    dmMediaLibrary:
+      name:         Media browser
+      credentials:  media_library
+  "Search engine":
+    dmSearchEngine:
+      name:         Manage index
+      credentials:  search_engine
+  
+Seo:
+  Services:
+    dmGoogleAnalytics:
+      name:         Google analytics
+      credentials:  use_google_analytics
+    dmGoogleWebmasterTools:
+      name:         Google webmaster tools
+      credentials:  use_google_webmaster_tools
+  Sitemap:
+    dmSitemap:
+      name:         Manage XML sitemap
+      credentials:  sitemap
+  Pages:
+    dmPage:
+      name:         Manage pages
+      credentials:  manage_pages, manual_metas
+    dmAutoSeo:
+      name:         Automatic SEO|Automatic SEO
+      credentials:  automatic_metas
+  Redirections:
+    dmRedirect:
+      name:         Url Redirections
+      credentials:  url_redirection
+
+System:
+  Configuration:
+    dmSetting:
+      name:         Setting
+      credentials:  system
+  Log:
+    dmSentMail:
+      name:         Sent mail
+      credentials:  sent_mail
+    dmError:
+      name:         Error
+      credentials:  error_log
+  Dev:
+    dmDiagram:
+      name:         See diagrams
+      credentials:  see_diagrams
+    dmCodeEditor:
+      name:         Code Editor
+      credentials:  code_editor
+    dmConsole:
+      name:         Diem Console
+      credentials:  system
+    dmServer:
+      name:         Server
+      credentials:  see_server

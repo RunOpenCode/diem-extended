@@ -1,0 +1,569 @@
+parameters:
+
+  text_diff.class:            dmTextDiff            # Responsible for generating text diffs
+
+  record_text_diff.class:     dmRecordTextDiff      # Responsible for rendering diffs between two versions of a record
+  record_text_diff.options:
+    media_width:              150
+    media_height:             100
+
+  mail.class:                 dmMail                # Responsible for building an email from a DmMailTemplate and a data array, then pass it to Swift.
+
+  mail_renderer.class:        dmMailTemplateRenderer
+
+  thread_launcher.class:      dmThreadLauncher      # Responsible for launching background tasks using an internal shell.
+  thread_launcher.options:
+    cli_file:                 cache/dm/cli.php      # where to write the task bootstrap, relative to the project root directory
+
+  page_synchronizer.class:    dmPageSynchronizer    # Responsible for adding, updating and removing pages when the site content changes.
+
+  seo_synchronizer.class:     dmSeoSynchronizer     # Responsible for updating pages metas when the site content changes.
+
+  media_synchronizer.class:   dmMediaSynchronizer   # Responsible for updating media library when the filesystem changes
+
+  cache_cleaner.class:        dmCacheCleaner        # Responsible for clearing the cache automatically when the site content changes.
+  cache_cleaner.options:
+    applications:             [ admin, front ]      # applications whose cache should be cleared
+    environments:             [ prod, dev ]         # environments whose cache should be cleared
+    
+    # when a instance of one of this models is created/updated/deleted, the cache is **NOT** cleared.
+    safe_models:              [ DmSentMail, DmError, DmRedirect, DmUser, DmPermission, DmGroup, DmGroupPermission, DmUserPermission, DmUserGroup, DmRememberKey, DmMailTemplate ]
+
+  form_field.class:           dmFormField           # Represents a field in a form. Allows chainability in form template helpers.
+
+  markdown.class:             dmMarkdown            # Responsible for parsing markdown text and generating HTML.
+  markdown.options:
+    auto_header_id:           true                  # whether to generate automatic header ids, based on header text and previous headers structure
+
+  script_name_resolver.class: dmScriptNameResolver  # Responsible for finding applications bootstrap urls. Allows to make a link to the site from the admin, and a link to admin from the site.
+
+  error_watcher.class:        dmErrorWatcher        # Responsible for listening the "application.throw_exception" events and make something with the errors
+  error_watcher.options:
+    error_description_class:  dmErrorDescription    # class used to describe an error
+    mail_superadmin:          false                 # send mail to superadmin ( uses superadmin's email )
+    store_in_db:              true                  # store error in database
+
+  media_tag_image.class:      dmMediaTagImage       # Responsible for rendering <img> tags
+  media_tag_image.options:    []                    # Configurable from the graphical configuration panel
+  
+  media_tag_application.class:   dmMediaTagApplication # Responsible for rendering flash objects
+  media_tag_application.options: []
+  
+  media_tag_video.class:      dmMediaTagVideo       # Responsible for rendering video
+  media_tag_video.options:    []
+  
+  media_tag_audio.class:      dmMediaTagAudio       # Responsible for rendering audio
+  media_tag_audio.options:    []
+
+  media_resource.class:       dmMediaResource       # Ressource for a media_tag_*
+
+  table_tag.class:            dmTableTag            # Responsible for rendering HTML tables with the £table helper
+
+  search_engine.class:        dmSearchEngine        # Responsible for managing search indices and provide a handfull programming interface.
+  search_engine.options:
+    dir:                      data/dm/index         # where to save indices
+
+  search_index.class:         dmSearchIndex         # Responsible for maintaining and querying an index ( for example, the "en" index )
+  search_index.options:
+    culture:                                        # Index culture ( will be set by search_engine when creating index )
+    name:                                           # Index name ( will be set by search_engine when creating index )
+  
+  search_document.class:      dmSearchPageDocument  # Responsible for indexing a page
+  search_document.source:                           # source where to fetch data to index ( will be set by search_index when creating document )
+  search_document.options:
+    culture:                                        # Document culture ( will be set by search_index when creating document )
+
+  search_hit.class:           dmSearchPageHit       # Single search result
+  search_hit.score:                                 # Hit score in % ( will be set by search_index when creating the hit )
+  search_hit.page_id:                               # Hit page id ( will be set by search_index when creating the hit )
+  search_hit.page_content:                          # Hit page content ( will be set by search_index when creating the hit )
+
+  theme.class:                dmTheme               # Responsible for managing a CSS theme
+
+  stylesheet_compressor.class: dmStylesheetCompressor # Responsible for minifying, merging and compressing stylesheets
+  stylesheet_compressor.options:
+    minify:                   true                  # whether to minify code
+    gz_compression:           false                 # whether to compress with gzip
+
+  javascript_compressor.class: dmJavascriptCompressor # Responsible for minifying, merging and compressing javascripts
+  javascript_compressor.options:
+    minify:                   true                  # whether to minify code
+    black_list:               [ jquery.tree.min.js ] # List of filenames not to minify
+    gz_compression:           false                 # whether to compress with gzip
+
+  cache_manager.class:        dmCacheManager        # Responsible for managing cache
+  cache_manager.options:
+    meta_cache_class:         dmMetaCache           # class for metacache ( use file cache or apc cache depending on server )
+
+  filesystem.class:           dmFilesystem          # Extension of sfFilesystem
+  
+  mime_type_resolver.class:   dmMimeTypeResolver    # Detects mime types from file names
+  
+  event_log.class:            dmEventLog            # Responsible for logging all notable events
+  event_log.options:
+    name:                     Events                # the log visible name
+    file:                     'data/dm/log/event.log' # where to save the log file, relative to project root directory
+    entry_service_name:       event_log_entry       # service name for an entry of this log
+    rotation:                 true                  # enable rotation on the log file ( strongly recommended )
+    max_size_kilobytes:       1024                  # max size for the log file before rotating
+    ignore_models:            []                    # models not to log
+    ignore_internal_actions:  true                  # wether to ignore Diem internal actions
+    enabled:                  true                  # wether to log events or not
+  
+  event_log_entry.class:      dmEventLogEntry       # An entry of the event log
+  
+  request_log.class:          dmRequestLog          # Responsible for logging all requests
+  request_log.options:
+    name:                     Requests              # the log visible name
+    file:                     'data/dm/log/request.log' # where to save the log file, relative to project root directory
+    entry_service_name:       request_log_entry     # service name for an entry of this log
+    rotation:                 true                  # enable rotation on the log file ( strongly recommended )
+    max_size_kilobytes:       1024                  # max size for the log file before rotating
+    enabled:                  true                  # wether to log requests or not
+  
+  request_log_entry.class:    dmRequestLogEntry     # An entry of the event log
+  
+  static_log.class:           dmStaticLog           # Emulator of static page loging
+  static_log.options:
+    name:                     Requests (static pages)  # the log visible name
+    file:                     'data/dm/log/static.log' # where to save the log file, relative to project root directory
+    entry_service_name:       static_log_entry     # service name for an entry of this log
+    rotation:                 true                  # enable rotation on the log file ( strongly recommended )
+    max_size_kilobytes:       1024                  # max size for the log file before rotating
+    enabled:                  true                  # wether to log requests or not
+  
+  static_log_entry.class:    dmStaticLogEntry     # An entry of the event log
+  
+
+  browser.class:              dmBrowser             # Represents a user browser
+  browser.user_agent_string:
+
+  user_agent_parser.class:    dmUserAgentParser     # Parse a user agent string
+    
+  page_tree_watcher.class:    dmPageTreeWatcher     # Responsible for listening all events that may require a page synchronization, and launch the synchronization if any before redirections.
+  page_tree_watcher.options:
+    use_thread:               auto                  # launch heavy synchronization tasks on another process ( auto, true, false )
+  
+  file_backup.class:          dmFileBackup          # Responsible for saving a copy of files edited. All files modified with a Diem code editor are backuped.
+  file_backup.options:
+    dir:                      'data/dm/backup/filesystem' # where to save files, relative to project root directory.
+    
+  helper.class:               dmHelper              # Object oriented template helper.
+  helper.options:
+    use_beaf:                 false                 # whether to use the "before-after" functionality on £ helper
+  
+  widget_type_manager.class:  dmWidgetTypeManager   # Responsible for managing widget types.
+  widget_type_manager.options:
+    config_file:              'config/dm/widget_types.yml' # path to the widget type configuration file, relative to the project directory
+ 
+  page_i18n_builder.class:    dmPageI18nBuilder     # Multilingual sites only. When a page is created in a culture,
+                                                    # this service will generate missing page translations for other cultures.
+  page_i18n_builder.options:
+    activate_new_translations: true                 # if set to true, the created translations are active and can be accessed by users
+
+  project_loremizer.class:    dmProjectLoremizer    # Fills the project with random records
+  project_loremizer.options:
+    nb_records_per_table:     10                    # how many records to create for each table
+
+  table_loremizer.class:      dmTableLoremizer      # Fills a table with random records
+  table_loremizer.options:
+    nb_records:               10                    # how many records to create for this table
+    create_associations:      true                  # create association records
+
+  record_loremizer.class:     dmRecordLoremizer     # Fills the record fields with random values
+  record_loremizer.options:
+    override:                 false                 # replace existing values
+    create_associations:      true                  # create association records
+
+  test_functional.class:      dmTestFunctional      # Replaces sfTestFunctional
+
+  sf_browser.class:           dmSfBrowser           # Replaces sfBrowser
+
+  doctrine_pager.class:       dmDoctrinePager       # Responsible for paginating the doctrine collections
+
+  web_browser.class:          dmWebBrowser          # Basic HTTP client, overrides sfWebBrowser
+  web_browser.options:
+    default_headers:          []
+    adapter_class:
+    adapter_options:          []
+
+  menu.class:                 dmMenu                # Build an render menus
+  menu.options:               []
+
+  page_tree_view.class:       dmPageTreeView        # Render the page tree
+  page_tree_view.options:     []
+
+  model_tree_view.class:       dmModelTreeView        # Render a model tree
+  model_tree_view.options:    []
+
+  download.class:             dmDownloadResponse    # Triggers a download from a file or string data
+  download.options:           []
+
+  data_load.class:            dmDataLoad            # Responsible for loading default data in the project
+
+  markdown_translator.class:  dmMarkdownTranslator  # Responsible for providing the markdown editor translated strings
+  markdown_translator.options:
+    messages:                 [ Heading 2, Heading 3, Heading 4, Bold, Italic, Bulleted List, Numeric List, Link, Enlarge the editor ]
+
+  layout_helper.options:      []
+  
+  module_security_manager.class: dmModuleSecurityManager
+  module_security_actions_action_strategy.class: dmModuleActionSecurityStrategy
+  module_security_actions_record_strategy.class: dmModuleActionRecordSecurityStrategy
+  module_security_actions_mixed_strategy.class: dmModuleActionMixedRecordSecurityStrategy
+  
+  module_security_actions.strategies: 
+    - action
+    - record
+    - mixed
+    
+  module_security_components.strategies: []
+  
+  record_security_manager.class: dmRecordSecurityManager
+  
+  record_permission_association_manager.class:      dmRecordPermissionAssociationManager
+  
+  behaviors_manager.class:    dmBehaviorsManager    # Responsible for managing behaviors
+  behaviors_manager.options:
+    page_attachable:  false
+    area_attachable:  false
+    zone_attachable:  true
+    widget_attachable:  true
+  
+  less_compiler.class:    dmLessCompiler    # Responsible for managing behaviors
+  less_compiler.options:
+    adapter:  dmLessAdapterPHP
+    cache_dir: cache
+  
+services:
+
+  text_diff:
+    class:                    %text_diff.class%
+    shared:                   true
+    arguments:                [ ]
+
+  record_text_diff:
+    class:                    %record_text_diff.class%
+    shared:                   true
+    arguments:                [ @text_diff, @i18n, @helper, %record_text_diff.options% ]
+
+  mail:
+    class:                    %mail.class%
+    shared:                   false
+    arguments:                [ @context, @dispatcher ]
+
+  mail_renderer:
+    class:                    %mail_renderer.class%
+    shared:                   true
+    arguments:                [ @service_container ]
+
+  thread_launcher:
+    class:                    %thread_launcher.class%
+    shared:                   false
+    arguments:                [ @filesystem, %thread_launcher.options% ]
+
+  page_synchronizer:
+    class:                    %page_synchronizer.class%
+    shared:                   true
+    arguments:                [ @module_manager ]
+
+  seo_synchronizer:
+    class:                    %seo_synchronizer.class%
+    shared:                   true
+    arguments:                [ @module_manager ]
+
+  cache_cleaner:
+    class:                    %cache_cleaner.class%
+    shared:                   true
+    arguments:                [ @cache_manager, @dispatcher, %cache_cleaner.options% ]
+
+  markdown:
+    class:                    %markdown.class%
+    shared:                   true
+    arguments:                [ @helper, %markdown.options% ]
+
+  script_name_resolver:
+    class:                    %script_name_resolver.class%
+    shared:                   true
+    arguments:                [ %request.context%, %user.culture% ]
+
+  error_watcher:
+    class:                    %error_watcher.class%
+    shared:                   true
+    arguments:                [ @dispatcher, @context, %error_watcher.options% ]
+
+  media_tag_image:
+    class:                    %media_tag_image.class%
+    shared:                   false
+    arguments:                [ %media_tag.source%, @context, %media_tag_image.options% ]
+
+  media_tag_application:
+    class:                    %media_tag_application.class%
+    shared:                   false
+    arguments:                [ %media_tag.source%, @context, %media_tag_application.options% ]
+
+  media_tag_video:
+    class:                    %media_tag_video.class%
+    shared:                   false
+    arguments:                [ %media_tag.source%, @context, %media_tag_video.options% ]
+
+  media_tag_audio:
+    class:                    %media_tag_audio.class%
+    shared:                   false
+    arguments:                [ %media_tag.source%, @context, %media_tag_audio.options% ]
+
+  media_resource:
+    class:                    %media_resource.class%
+    shared:                   false
+    arguments:                [ @mime_type_resolver, %user.theme%, %user.culture%, %request.context% ]
+    
+  table_tag:
+    class:                    %table_tag.class%
+    shared:                   false
+    arguments:                [ @helper ]
+
+  search_engine:
+    class:                    %search_engine.class%
+    shared:                   true
+    arguments:                [ @service_container, %search_engine.options% ]
+
+  search_index:
+    class:                    %search_index.class%
+    shared:                   false
+    arguments:                [ @service_container, %search_index.options% ]
+
+  search_document:
+    class:                    %search_document.class%
+    shared:                   false
+    arguments:                [ @context, %search_document.source%, %search_document.options% ]
+    
+  search_hit:
+    class:                    %search_hit.class%
+    shared:                   false
+    arguments:                [ %search_hit.score%, %search_hit.page_id%, %search_hit.page_content% ]
+
+  asset_config:
+    class:                    %asset_config.class%
+    shared:                   true
+    arguments:                [ @dispatcher, @user ]
+
+  theme:
+    class:                    %theme.class%
+    shared:                   false
+    arguments:                [ @dispatcher, @filesystem, %request.context%, %theme.options% ]
+    
+  stylesheet_compressor:
+    class:                    %stylesheet_compressor.class%
+    shared:                   true
+    arguments:                [ @dispatcher, @filesystem, %request.context%, %stylesheet_compressor.options% ]
+
+  javascript_compressor:
+    class:                    %javascript_compressor.class%
+    shared:                   true
+    arguments:                [ @dispatcher, @filesystem, %request.context%, %javascript_compressor.options% ]
+
+  layout_helper:
+    class:                    %layout_helper.class%
+    shared:                   false
+    arguments:                [ @dispatcher, @service_container, %layout_helper.options% ]
+
+  filesystem:
+    class:                    %filesystem.class%
+    shared:                   true
+    arguments:                [ @dispatcher ]
+
+  mime_type_resolver:
+    class:                    %mime_type_resolver.class%
+    shared:                   true
+    arguments:                [ @cache_manager ]
+      
+  event_log:
+    class:                    %event_log.class%
+    shared:                   true
+    arguments:                [ @dispatcher, @filesystem, @service_container, %event_log.options% ]
+      
+  event_log_entry:
+    class:                    %event_log_entry.class%
+    shared:                   false
+    arguments:                [ @service_container ]
+      
+  request_log:
+    class:                    %request_log.class%
+    shared:                   true
+    arguments:                [ @dispatcher, @filesystem, @service_container, %request_log.options% ]
+      
+  request_log_entry:
+    class:                    %request_log_entry.class%
+    shared:                   false
+    arguments:                [ @service_container ]
+    
+  static_log:
+    class:                    %static_log.class%
+    shared:                   true
+    arguments:                [ @dispatcher, @filesystem, @service_container, %static_log.options% ]
+      
+  static_log_entry:
+    class:                    %static_log_entry.class%
+    shared:                   false
+    arguments:                [ @service_container ]  
+     
+  browser:
+    class:                    %browser.class%
+    shared:                   false
+    arguments:                [ %browser.user_agent_string%, @user_agent_parser ]
+    calls:
+      - [ setEventDispatcher, [ @dispatcher ] ]
+
+  user_agent_parser:
+    class:                    %user_agent_parser.class%
+    shared:                   true
+      
+  page_tree_watcher:
+    class:                    %page_tree_watcher.class%
+    shared:                   true
+    arguments:                [ @dispatcher, @service_container, %page_tree_watcher.options% ]
+      
+  file_backup:
+    class:                    %file_backup.class%
+    shared:                   true
+    arguments:                [ @dispatcher, @filesystem, %file_backup.options% ]
+  
+  helper:
+    class:                    %helper.class%
+    shared:                   true
+    arguments:                [ @context, %helper.options% ]
+  
+  link_tag_factory:
+    class:                    %link_tag_factory.class%
+    shared:                   true
+    arguments:                [ @service_container ]
+      
+  cache_manager:
+    class:                    %cache_manager.class%
+    shared:                   true
+    arguments:                [ @dispatcher, %cache_manager.options% ]
+
+  widget_type_manager:
+    class:                    %widget_type_manager.class%
+    shared:                   true
+    arguments:                [ @dispatcher, @service_container, %widget_type_manager.options% ]
+
+  page_i18n_builder:
+    class:                    %page_i18n_builder.class%
+    shared:                   true
+    arguments:                [ @dispatcher, %page_i18n_builder.options% ]
+
+  project_loremizer:
+    class:                    %project_loremizer.class%
+    shared:                   false
+    arguments:                [ @module_manager, @service_container, %project_loremizer.options% ]
+
+  table_loremizer:
+    class:                    %table_loremizer.class%
+    shared:                   false
+    arguments:                [ @service_container, %table_loremizer.options% ]
+
+  record_loremizer:
+    class:                    %record_loremizer.class%
+    shared:                   false
+    arguments:                [ %record_loremizer.options% ]
+
+  test_functional:
+    class:                    %test_functional.class%
+    shared:                   false
+    arguments:                [ @sf_browser ]
+
+  sf_browser:
+    class:                    %sf_browser.class%
+    shared:                   false
+    arguments:                []
+
+  doctrine_pager:
+    class:                    %doctrine_pager.class%
+    shared:                   false
+    arguments:                [ %doctrine_pager.model% ]
+
+  web_browser:
+    class:                    %web_browser.class%
+    shared:                   true
+    arguments:                [ %web_browser.options% ]
+
+  menu:
+    class:                    %menu.class%
+    shared:                   false
+    arguments:                [ @service_container, %menu.options% ]
+
+  media_synchronizer:
+    class:                    %media_synchronizer.class%
+    shared:                   true
+    arguments:                [ @filesystem ]
+
+  page_tree_view:
+    class:                    %page_tree_view.class%
+    shared:                   false
+    arguments:                [ @helper, %user.culture%, %page_tree_view.options% ]
+
+  model_tree_view:
+    class:                    %model_tree_view.class%
+    shared:                   false
+    arguments:                [ @helper, %user.culture%, %model_tree_view.options% ]
+
+  download:
+    class:                    %download.class%
+    shared:                   false
+    arguments:                [ @response, @mime_type_resolver, %download.options% ]
+
+  data_load:
+    class:                    %data_load.class%
+    shared:                   false
+    arguments:                [ @dispatcher, @i18n ]
+
+  markdown_translator:
+    class:                    %markdown_translator.class%
+    shared:                   false
+    arguments:                [ @i18n, %markdown_translator.options% ]
+  
+  tool_bar_view:
+    class:                    %tool_bar_view.class%
+    shared:                   false
+    arguments:                [ @dispatcher, @user, @helper, @i18n, @service_container ]
+    
+  module_security_manager:
+    class:                    %module_security_manager.class%
+    shared:                   false
+    arguments:                [ @context, @service_container, @user ]
+    
+  module_security_actions_action_strategy: 
+    class:                    %module_security_actions_action_strategy.class%
+    shared:                   false
+    arguments:                [ @context, @service_container, @user ]
+    
+  module_security_actions_record_strategy:
+    class:                    %module_security_actions_record_strategy.class%
+    shared:                   false
+    arguments:                [ @context, @service_container, @user ]
+    
+  module_security_actions_mixed_strategy: 
+    class:                    %module_security_actions_mixed_strategy.class%
+    shared:                   false
+    arguments:                [ @context, @service_container, @user ]
+      
+  record_security_manager:
+    class:                    %record_security_manager.class%
+    shared:                   false
+    arguments:                [ @context, @service_container ]
+    
+  record_permission_association_manager:
+    class:                                          %record_permission_association_manager.class%
+    shared:                                         true
+    arguments:                                     [ @context, @service_container, @user ]
+  
+  behaviors_manager:
+    class:                    %behaviors_manager.class%
+    shared:                   true
+    arguments:                [@context, %behaviors_manager.options%]
+  
+  less_compiler:
+    class:                    %less_compiler.class%
+    shared:                   true
+    arguments:                [%less_compiler.options%]

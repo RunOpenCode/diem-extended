@@ -1,0 +1,124 @@
+div.dm_media_library .list .right {
+  float: right;
+  width: 200px;
+}
+
+div.dm_media_library .list .center {
+  margin-right: 220px;
+}
+
+div.dm_media_library ul.content li {
+  float: left;
+  margin: 4px 3px 1px 0;
+  text-align: center;
+  font-size: 11px;
+  height: 135px;
+}
+
+div.dm_media_library ul.content a {
+  display: block;
+  width: 128px;
+  min-height: 81px;
+  overflow: hidden;
+  border: 1px solid #fff;
+  padding: 5px;
+  color: #333;
+}
+div.dm_media_library ul.content span.image_background {
+  position: relative;
+  width: 126px;
+  height: 126px;
+  border: 1px solid #888;
+  display: block;
+}
+
+div.dm_media_library ul.content a:hover {
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  background-color: #ffffaa;
+  border-color: #ffdd44;
+  background: #ffffaa url(../images/media/bg_hover.png) center left repeat-x;
+  text-decoration: none;
+}
+div.dm_media_library ul.content a.image img {
+  background: url(../images/media/bg_image.png) bottom left repeat-x;
+  padding-bottom: 6px;
+}
+div.dm_media_library ul.content a.image .name {
+  margin-top: -4px;
+}
+div.dm_media_library ul.content a.root:hover {
+  border-color: #fff;
+  background: #fff;
+}
+
+div.dm_media_library ul.content img {
+}
+div.dm_media_library ul.content .name {
+  margin-top: 3px;
+  display: block;
+}
+div.dm_media_library ul.content span.image_background .name {
+  background: url(../images/media/name_bg.png) repeat;
+  bottom: 0px;
+  position: absolute;
+  padding: 10px 5px 2px 5px;
+  margin-bottom: 0;
+  color: #222;
+  width: 116px;
+}
+div.dm_media_library ul.content .name span.ws{
+  display: none;
+}
+div.dm_media_library ul.content .more {
+  margin-left: 5px;
+  color: #aaa;
+}
+
+div.dm_media_library div.dm_media_file .view {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  text-align: center;
+}
+div.dm_media_library div.dm_media_file .content {
+  margin-left: 310px;
+}
+
+div.dm_media_library div.dm_media_file .infos {
+  background: #F8F8F8;
+  padding: 10px;
+  margin: 10px 0;
+}
+div.dm_media_library div.dm_media_file .infos dt {
+  float: left;
+  width: 80px;
+  text-align: right;
+}
+div.dm_media_library div.dm_media_file .infos dd {
+  margin-left: 92px;
+  font-weight: bold;
+}
+div.dm_media_library div.dm_media_file .infos dd ul li {
+  list-style: disc inside;
+  color: #666;
+  overflow: hidden;
+  white-space: nowrap;
+}
+div.dm_media_library div.dm_media_file .infos a {
+  color: #046BCA;
+  font-weight: normal;
+}
+
+div.dm_media_library div.dm_media_file .actions {
+  margin: 10px 0;
+}
+
+div.dm_media_library .control li {
+  margin: 10px 0;
+}
+
+div.dm_media_library .control li a {
+  display: block;
+}

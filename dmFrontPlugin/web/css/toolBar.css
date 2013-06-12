@@ -1,0 +1,204 @@
+body {
+  margin-bottom: 30px;
+}
+
+#dm_tool_bar {
+  bottom: 0;
+  box-shadow: 0 -4px 4px #888;
+  -webkit-box-shadow: 0 -4px 4px #888;
+  -moz-box-shadow: 0 -4px 4px #888;
+}
+
+#dm_tool_bar.hidden {
+  width: 16px;
+  height: 16px;
+  overflow-y: hidden;
+}
+
+#dm_tool_bar a.show_tool_bar_toggle {
+  float: left;
+  margin-top: 13px;
+}
+#dm_tool_bar.hidden a.show_tool_bar_toggle {
+  margin-top: 0px;
+}
+
+#dm_tool_bar div.dm_menu {
+  margin: 0 3px;
+  color: #888;
+}
+
+#dm_tool_bar ul.level0 {
+  position: relative;
+}
+#dm_tool_bar ul.level0 > li {
+  float: left;
+  padding: 0 1px 1px 1px;
+  position: relative;
+  height: 25px;
+  cursor: default;
+  background: none;
+  border: none;
+}
+#dm_tool_bar a.dm_fake_link {
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+#dm_tool_bar ul.level0 > li.ui-state-active {
+  background: #fff;
+  border: 1px solid #aaa;
+  border-top: none;
+  padding: 0;
+}
+
+#dm_tool_bar ul.level0 > li.ui-state-active > a {
+  color: #222;
+}
+
+#dm_tool_bar ul.level1 {
+  font-size: 12px;
+  position: absolute;
+  bottom: 25px;
+  width: 455px;
+  border-bottom: none;
+  padding-bottom: 10px;
+  border-radius: 4px 4px 0 0;
+  -moz-border-radius: 4px 4px 0 0;
+  -webkit-border-radius: 4px 4px 0 0;
+
+  left: -4000px;
+  
+  height: 300px;
+  overflow: auto;
+  background: #FCFCFC;
+  box-shadow: 4px -4px 4px #888;
+  -moz-box-shadow: 4px -4px 4px #888;
+  -webkit-box-shadow: 4px -4px 4px #888;
+}
+
+#dm_tool_bar ul.level0 > li.ui-state-active ul.level1 {
+  left: -1px;
+}
+
+#dm_tool_bar ul.level1 > li {
+  display: block;
+  float: none;
+  padding-top: 10px;
+  padding: 10px 10px 0 10px;
+}
+
+#dm_tool_bar ul.level1 > li.dm_droppable_widgets > a, #dm_tool_bar ul.level1 > li.dm_droppable_behaviors > a {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #046BCA;
+  cursor: default;
+}
+
+#dm_tool_bar ul.level1 > li > a:hover {
+  text-decoration: none;
+}
+
+#dm_tool_bar ul.level2 > li {
+  margin-left: 20px;
+  color: #aaa;
+  
+  float: left;
+  margin: 3px 0 0 3px;
+  list-style: none;
+}
+
+#dm_tool_bar span.move,
+div.dm_zone_add_helper,
+div.dm_widget_add_helper,
+div.dm_behavior_add_helper {
+  cursor: move;
+  display:block;
+  padding: 3px 0;
+  width: 134px;
+  color: #666;
+  background: url(../../dmCorePlugin/images/default_bg.png) repeat-x 50% 50%;
+  border: 1px solid #D3D3D3;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+#dm_tool_bar span.move img, div.dm_behavior_add_helper img {
+    vertical-align: text-bottom;
+    margin-right: 0.2em;    
+}
+
+div.dm_zone_add_helper,
+div.dm_widget_add_helper {
+	white-space: nowrap;
+	padding: 5px 0;
+	font-weight: bold;
+  background: url(../../dmCorePlugin/images/default_bg_blue.png) repeat-x 50% 50%;
+  box-shadow: 0 0 4px #888;
+  -moz-box-shadow: 0 0 4px #888;
+  -webkit-box-shadow: 0 0 4px #888;
+  color: #444;
+}
+
+#dm_tool_bar span.move:hover {
+  color: #444;
+  background: url(../../dmCorePlugin/images/default_bg_blue.png) repeat-x 50% 50%;
+  box-shadow: 0 0 4px #888;
+  -moz-box-shadow: 0 0 4px #888;
+  -webkit-box-shadow: 0 0 4px #888;
+}
+
+#dm_tool_bar ul.level2 > li a {
+  display: block;
+  padding: 1px 0;
+  color: #666;
+}
+
+/*
+ * actions bar
+ */
+#dm_tool_bar ul.level1 > li.dm_add_menu_actions, #dm_tool_bar ul.level1 > li.dm_behaviors_menu_actions {
+  padding: 10px;
+  background: url(../../dmCorePlugin/images/default_bg.png) repeat-x 50% 50%;
+  border-radius: 4px 0 0 0;
+  -moz-border-radius: 4px 0 0 0;
+  -webkit-border-radius: 4px 0 0 0;
+  border-bottom: 1px solid #D4D4D4;
+}
+
+#dm_tool_bar ul.level1 > li.dm_add_menu_actions input, #dm_tool_bar ul.level1 > li.dm_behaviors_menu_actions input {
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  float: left;
+  padding: 3px 5px;
+  width: 134px;
+  color: #666;
+  height: 16px;
+  font-family: Verdana,Arial,sans-serif;
+  font-size: 12px;
+}
+
+#dm_tool_bar ul.level1 > li.dm_add_menu_actions span.zone_add {
+  float: left;
+  margin-left: 10px;
+}
+
+#dm_tool_bar ul.level1 > li.dm_add_menu_actions a.page_add_form {
+  color: #046BCA;
+  margin-left: 10px;
+  margin-top: 0;
+  line-height:22px;
+}
+
+#dm_tool_bar #sfWebDebug .sfWebDebugTop
+{
+  top: auto;
+  bottom: 30px;
+  padding: 10px 1% 0 1%;
+  height: 400px;
+  overflow-y: auto;
+}

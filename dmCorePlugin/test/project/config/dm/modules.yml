@@ -1,0 +1,75 @@
+Project:  
+
+  Global:  
+
+    main:               # the main module is required, and must not be removed.  
+      components:
+        header:  
+        footer:
+        sitemap:
+
+  Food:
+  
+    dmTestFruit:
+      page:             false
+      components:
+        list:  
+        show:  
+
+  Blog:  
+
+    dmTestDomain:
+      page:             true  
+      components:
+        list:
+        show:
+        listByTag:      { filters: dmTag }
+
+    dmTestCateg:
+      parent:           dmTestDomain
+      page:             true
+      components:
+        list:  
+        listByDomain:  
+          filters:      dmTestDomain
+        show:  
+
+    dmTestPost:
+      parent:           dmTestCateg
+      page:             true
+      actions: # use the deprecated but supported "actions" keyword instead of "components"
+        listByDomain:
+          filters:      dmTestDomain
+        listByCateg:
+          filters:      dmTestCateg
+        listByTag:
+          filters:      dmTestTag
+        show:
+
+    dmTestComment:  
+      parent:           dmTestPost  
+      components:
+        listByDomain:  
+          filters:      dmTestDomain
+        listByCateg:  
+          filters:      dmTestCateg
+        listByPost:  
+          filters:      dmTestPost  
+        form:  
+
+    dmTestTag:
+      page:             true
+      components:
+        list:  
+        listByPost:  
+          filters:      dmTestPost
+        show:
+
+  Author:
+
+    dmUser:
+      name:             Author
+      page:             true
+      components:
+        list:
+        show:

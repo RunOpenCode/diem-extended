@@ -1,0 +1,12 @@
+all:
+  doctrine:
+    class: sfDoctrineDatabase
+    param:
+      dsn: 'sqlite:%SF_DATA_DIR%/db.sqlite'
+
+test:
+  doctrine:
+    param:
+      dsn: 'sqlite:%SF_DATA_DIR%/db.sqlite'
+
+

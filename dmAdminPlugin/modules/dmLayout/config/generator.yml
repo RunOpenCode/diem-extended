@@ -1,0 +1,45 @@
+generator:
+  class: dmAdminDoctrineGenerator
+  param:
+    model_class: DmLayout
+    theme: dmAdmin
+    non_verbose_templates: true
+    with_show: false
+    route_prefix: dm_layout
+    with_doctrine_route: false
+    config:
+      actions: ~
+      fields:
+        css_class:
+          label: "CSS class"
+          help: "This CSS class is applied to the body tag"
+        template:
+          help: "Template to use, located on apps/front/modules/dmFront/templates/%template_name%Success.php"
+        content:
+          label: Areas
+      list:
+        display:
+          - =name
+          - template
+          - css_class
+          - _content
+          - nb_pages
+          - _duplicate
+        sort:
+          - name
+          - asc
+        table_method: getAdminListQuery
+        table_count_method: ~
+      filter:
+        display:
+          - name
+          - css_class
+      form:
+        display:
+          NONE: [name, css_class]
+          Advanced: [template]
+        class: DmLayoutAdminForm
+        fields: {  }
+      edit: ~
+      new: ~
+    sortable: false

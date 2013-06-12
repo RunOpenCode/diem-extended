@@ -1,0 +1,48 @@
+generator:
+  class: dmAdminDoctrineGenerator
+  param:
+    model_class: DmError
+    theme: dmAdmin
+    non_verbose_templates: true
+    with_show: false
+    route_prefix: dm_error
+    with_doctrine_route: false
+    config:
+      actions: ~
+      fields:
+        php_class:
+          label: PHP Class
+      list:
+        display:
+          - =name
+          - php_class
+          - description
+          - module
+          - action
+          - uri
+          - env
+          - created_at
+        sort:
+          - created_at
+          - desc
+        table_method: getAdminListQuery
+        table_count_method: ~
+      filter:
+        display:
+          - name
+          - php_class
+          - description
+          - module
+          - action
+          - uri
+          - env
+          - created_at
+      form:
+        display:
+          NONE: [name]
+          Description: [_description_field]
+          Others: [php_class, module, action, uri, env]
+        class: DmErrorAdminForm
+      edit: ~
+      new: ~
+    sortable: false

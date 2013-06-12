@@ -1,0 +1,43 @@
+generator:
+  class: dmAdminDoctrineGenerator
+  param:
+    model_class:           DmGroup
+    theme:                 dmAdmin
+    non_verbose_templates: true
+    with_show:             false
+    route_prefix:          dm_group
+    with_doctrine_route:   true
+
+    config:
+      actions: ~
+      fields:
+        users_list:
+          label: Users
+        permissions_list:
+          label: Permissions
+        records_list: 
+          label: Records
+      list:
+        display: [=name, description, created_at, updated_at]
+        sort:
+          - name
+          - asc
+        table_method: getAdminListQuery
+        table_count_method: ~
+        loremize: false
+  
+      filter:
+        display: 
+          - name
+          - users_list
+          - permissions_list
+ 
+      form:
+        display:
+          NONE: [id, name]
+          Users: [users_list]
+          Permissions: [permissions_list]
+          Records: [records_list]
+          Others: [description]
+        class: DmGroupAdminForm
+        fields: {  }

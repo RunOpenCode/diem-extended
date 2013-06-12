@@ -1,0 +1,31 @@
+div.dm_data {
+  overflow: hidden;
+}
+
+div.dm_data table {
+  width: 100%;
+}
+
+div.dm_data th,
+div.dm_data td {
+  padding: 5px;
+}
+
+div.dm_data th {
+  font-weight: bold;
+}
+
+div.dm_data td {
+  border-top: 1px dotted #ddd;
+  max-width: 600px;
+  overflow: hidden;
+}
+
+div.dm_data tr.odd {
+  background: #F0F4FC;
+}
+
+div.dm_data .light {
+  font-size: 10px;
+  color: #666;
+}

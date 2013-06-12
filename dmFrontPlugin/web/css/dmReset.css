@@ -1,0 +1,75 @@
+.dm a, a.dm {
+  cursor: pointer;
+}
+
+.dm,
+.dm form,
+.dm ul,
+.dm ol,
+.dm li,
+.dm span,
+.dm p,
+.dm a,
+.dm a:link,
+.dm a:hover,
+.dm a:visited,
+.dm label {
+  margin: 0;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  text-decoration: none;
+  color: inherit;
+  line-height: normal;
+  text-align: left;
+  font: inherit;
+  font-weight: normal;
+  font-family: arial, helvetica, verdana, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  text-decoration: none;
+}
+
+.dm li {
+  list-style: none !important;
+}
+
+.dm label {
+  display: inline;
+}
+
+.dm input,
+.dm input.submit,
+.dm input:focus,
+.dm select,
+.dm select:focus,
+.dm textarea,
+.dm textarea:focus {
+  border: 1px solid #D4D4D4;
+  color: #000;
+  background: #fff;
+  display: inline;
+  height: inherit;
+  padding: 2px;
+  margin: 0;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  font-family: arial, helvetica, verdana, sans-serif;
+  font-size: 11px;
+}
+
+.dm input[readonly] {
+  background: #eee;
+}
+
+.dm input[type=hidden] {
+  border: none;
+  display: none;
+}
+
+.dm ul,
+.dm ol,
+.dm li {
+  list-style: none;
+}

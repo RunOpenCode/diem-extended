@@ -1,0 +1,324 @@
+DmUser:
+  actAs: [Timestampable]
+  columns:
+    username:
+      type: string(255)
+      notnull: true
+      unique: true
+    email:
+      type: string(255)
+      notnull: true
+      unique: true
+    algorithm:
+      type: string(128)
+      default: sha1
+      notnull: true
+    salt: string(128)
+    password: string(128)
+    is_active:
+      type: boolean
+      default: true
+    is_super_admin:
+      type: boolean
+      default: false
+    last_login:
+      type: timestamp
+    forgot_password_code:
+      type: string(12)
+      unique: true
+  indexes:
+    is_active_idx:
+      fields: [is_active]
+  relations:
+    Groups:
+      class: DmGroup
+      local: dm_user_id
+      foreign: dm_group_id
+      refClass: DmUserGroup
+      foreignAlias: Users
+    Permissions:
+      class: DmPermission
+      local: dm_user_id
+      foreign: dm_permission_id
+      refClass: DmUserPermission
+      foreignAlias: Users
+    Records: 
+      class: DmRecordPermission
+      local: dm_user_id
+      foreign: dm_record_permission_id
+      refClass: DmRecordPermissionUser
+      foreignAlias: Users
+    RecordsPermissionsAssociations: 
+      class: DmRecordPermissionAssociation
+      refClass: DmRecordPermissionAssociationUser
+      local: dm_user_id
+      foreign: dm_record_permission_association_id
+      foreignAlias: Users
+      
+DmRecordPermissionUser:
+  options:
+    symfony:
+      form:   false
+      filter: false
+  columns: 
+    dm_user_id: {type: integer(11), notnull: true, primary: true}
+    dm_record_permission_id: {type: integer(11), notnull: true, primary: true}
+  relations:
+    User:
+      class: DmUser
+      local: dm_user_id
+      onDelete: CASCADE
+      foreignAlias: Records
+    Record: 
+      class: DmRecordPermission
+      local: dm_record_permission_id
+      onDelete: CASCADE
+      foreignAlias: Users
+      
+DmGroup:
+  actAs: [Timestampable]
+  columns:
+    name:
+      type: string(255)
+      unique: true
+    description: string(1000)
+  relations:
+    Users:
+      class: DmUser
+      refClass: DmUserGroup
+      local: dm_group_id
+      foreign: dm_user_id
+      foreignAlias: Groups
+    Permissions:
+      class: DmPermission
+      local: dm_group_id
+      foreign: dm_permission_id
+      refClass: DmGroupPermission
+      foreignAlias: Groups
+    Records: 
+      class: DmRecordPermission
+      local: dm_group_id
+      foreign: dm_record_permission_id
+      refClass: DmRecordPermissionGroup
+      foreignAlias: Groups
+    RecordsPermissionsAssociations: 
+      class: DmRecordPermissionAssociation
+      refClass: DmRecordPermissionAssociationGroup
+      local: dm_group_id
+      foreign: dm_record_permission_association_id
+      foreignAlias: Groups
+
+DmRecordPermissionGroup:
+  options:
+    symfony:
+      form:   false
+      filter: false 
+  columns: 
+    dm_group_id: {type: integer(11), notnull: true, primary: true}
+    dm_record_permission_id: {type: integer(11), notnull: true, primary: true}
+  relations:
+    Group:
+      class: DmGroup
+      local: dm_group_id
+      onDelete: CASCADE
+      foreignAlias: Records
+    Record:
+      class: DmRecordPermission
+      local: dm_record_permission_id
+      onDelete: CASCADE
+      foreignAlias: Groups
+
+DmPermission:
+  actAs: [Timestampable]
+  columns:
+    name:
+      type: string(255)
+      unique: true
+    description: string(5000)
+
+DmGroupPermission:
+  options:
+    symfony:
+      form:   false
+      filter: false
+  columns:
+    dm_group_id:
+      type: integer
+      primary: true
+    dm_permission_id:
+      type: integer
+      primary: true
+  relations:
+    Group:
+      class: DmGroup
+      local: dm_group_id
+      onDelete: CASCADE
+      foreignAlias: Permissions
+    Permission:
+      class: DmPermission
+      local: dm_permission_id
+      onDelete: CASCADE
+      foreignAlias: Groups
+
+DmUserPermission:
+  options:
+    symfony:
+      form:   false
+      filter: false
+  columns:
+    dm_user_id:
+      type: integer
+      primary: true
+    dm_permission_id:
+      type: integer
+      primary: true
+  relations:
+    User:
+      class: DmUser
+      local: dm_user_id
+      onDelete: CASCADE
+      foreignAlias: Permissions
+    Permission:
+      class: DmPermission
+      local: dm_permission_id
+      onDelete: CASCADE
+      foreignAlias: Users
+
+DmUserGroup:
+  options:
+    symfony:
+      form:   false
+      filter: false
+  columns:
+    dm_user_id:
+      type: integer
+      primary: true
+    dm_group_id:
+      type: integer
+      primary: true
+  relations:
+    User:
+      class: DmUser
+      local: dm_user_id
+      onDelete: CASCADE
+      foreignAlias: Groups
+    Group:
+      class: DmGroup
+      local: dm_group_id
+      onDelete: CASCADE
+      foreignAlias: Users
+
+DmRecordPermission: 
+  columns:
+    secure_module: {type: string(255), notnull: true}
+    secure_action: {type: string(255), notnull: true}
+    secure_model: {type: string(255), notnull: true}
+    secure_record: {type: integer(14), notnull: true}
+    description: string(1000)
+  relations:
+    Users:
+      class: DmUser
+      local: dm_record_permission_id
+      foreign: dm_user_id
+      refClass: DmRecordPermissionUser
+      foreignAlias: RecordsPermissions
+    Groups:
+      class: DmGroup
+      local: dm_record_permission_id
+      foreign: dm_group_id
+      refClass: DmRecordPermissionGroup
+      foreignAlias: RecordsPermissions
+  indexes:
+    #idx_secure_module_action_model: 
+      
+## Records Permissions Associations
+
+DmRecordPermissionAssociation:
+  columns:
+    dm_secure_action: 
+      type: string(255)
+    dm_secure_module: 
+      type: string(255) 
+    dm_secure_model:
+      type: string(255)
+  relations:
+    Groups:
+      class: DmGroup
+      refClass: DmRecordPermissionAssociationGroup
+      local: dm_record_permission_association_id
+      foreign: dm_group_id
+      foreignAlias: RecordsPermissionsAssociations
+    Users:
+      class: DmUser
+      refClass: DmRecordPermissionAssociationUser
+      local: dm_record_permission_association_id
+      foreign: dm_user_id
+      foreignAlias: RecordsPermissionsAssociations
+
+DmRecordPermissionAssociationGroup:
+  options:
+    symfony:
+      form:   false
+      filter: false
+  columns:
+    dm_group_id: { type: integer(11), notnull: true}
+    dm_record_permission_association_id: {type: integer(11), notnull: true}
+  relations:
+    Association: 
+      class: DmRecordPermissionAssociation
+      local: dm_record_permission_association_id
+      onDelete: CASCADE
+      foreignAlias: Groups
+    Group:
+      class: DmGroup
+      local: dm_group_id
+      onDelete: CASCADE
+      foreignAlias: RecordsPermissionsAssociations
+
+DmRecordPermissionAssociationUser:
+  options:
+    symfony:
+      form:   false
+      filter: false
+  columns:
+    dm_user_id: {type: integer(11), notnull: true}
+    dm_record_permission_association_id: {type: integer(11), notnull: true}
+  relations:
+    Association: 
+      class: DmRecordPermissionAssociation
+      local: dm_record_permission_association_id
+      onDelete: CASCADE
+      foreignAlias: Users
+    User:
+      class: DmUser
+      local: dm_user_id
+      onDelete: CASCADE
+      foreignAlias: RecordsPermissionsAssociations
+
+## Records Permissions Associations
+
+
+
+DmRememberKey:
+  actAs:
+    Timestampable:
+      updated:
+        disabled: true
+  options:
+    symfony:
+      form:   false
+      filter: false
+  columns:
+    dm_user_id:
+      type: integer
+    remember_key: string(32)
+    ip_address:
+      type: string(50)
+      primary: true
+  relations:
+    User:
+      class: DmUser
+      local: dm_user_id
+      foreignAlias: RememberKeys
+      foreignType: one
+      onDelete: CASCADE

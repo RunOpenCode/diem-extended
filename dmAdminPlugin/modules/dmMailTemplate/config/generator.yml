@@ -1,0 +1,81 @@
+generator:
+  class: dmAdminDoctrineGenerator
+  param:
+    model_class: DmMailTemplate
+    theme: dmAdmin
+    non_verbose_templates: true
+    with_show: false
+    route_prefix: dm_mail_template
+    with_doctrine_route: false
+    config:
+      actions: ~
+      fields:
+        is_html:
+          label: Html
+        is_active:
+          label: Active
+        subject:
+          is_big: true
+        body:
+          is_big: true
+        show_vars:
+          is_big: true
+        list_unsuscribe:
+          help:   "http://www.list-unsubscribe.com/"
+        dm_mail_decorator_id:
+          help: Decorator can be used only for mail templates in HTML format
+      list:
+        display:
+          - '=name'
+          - description
+          - _dm_mail_decorator_id
+          - is_active
+          - nb_sent_mails
+          - created_at
+          - updated_at
+        sort:
+          - created_at
+          - desc
+        table_method: getAdminListQuery
+        table_count_method: ~
+        object_actions:
+          _preview: ~
+          _edit: ~
+          _delete: ~
+      filter:
+        display:
+          - name
+          - dm_mail_decorator_id
+          - is_html
+          - is_active
+          - description
+          - vars
+          - subject
+          - body
+          - from_email
+          - to_email
+          - created_at
+          - updated_at
+      form:
+        display:
+          NONE: [name, is_active, description, _empty_field]
+          Decoration: [is_html, dm_mail_decorator_id]
+          Email: [_show_vars, subject, body, _empty_field]
+          Addresses: [from_email, to_email, cc_email, bcc_email]
+          Advanced: [reply_to_email, sender_email, list_unsuscribe, _empty_field]
+        class: DmMailTemplateAdminForm
+        fields: {  }
+      edit:
+        actions:
+          _list: ~
+          _save: ~
+          _save_and_add: ~
+          _save_and_list:
+            label: Save and Back to list
+          _save_and_next: ~
+          _delete: ~
+          _add:
+            title: Add a %1%
+          _preview: ~
+      new: ~
+    sortable: false

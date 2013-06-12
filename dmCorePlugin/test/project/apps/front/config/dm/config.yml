@@ -1,0 +1,20 @@
+all:
+
+  theming:
+    themes:                                       # list of themes
+      "First Theme":
+        dir:              theme                   # theme path from web dir
+        enabled:          false                   # theme disponibility from dmThemeManager
+      "Fancy Theme":
+        # testing BC compatibility path=dir
+        path:             fancyTheme
+        # testing enabled defaults to true
+      "Another Theme":
+        dir:              anotherTheme
+        enabled:          true
+
+  html:
+    doctype:
+      name:               html                    # Doctype name ( 'html', 'xhtml' )
+      version:            5                       # Doctype xhtml version ( '1.0', '1.1' ) or html version ( '4', '5' )
+      compliance:         transitional            # Doctype xhtml compliance ( 'strict', 'transitional' )

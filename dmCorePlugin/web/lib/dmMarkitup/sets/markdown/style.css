@@ -1,0 +1,42 @@
+div.markItUp li.markitup_heading_1 a {
+  background-image:url(images/h1.png); 
+}
+div.markItUp li.markitup_heading_2 a {
+  background-image:url(images/h2.png); 
+}
+div.markItUp li.markitup_heading_3 a {
+  background-image:url(images/h3.png); 
+}
+div.markItUp li.markitup_heading_4 a {
+  background-image:url(images/h4.png); 
+}
+
+div.markItUp li.markitup_bold a {
+  background-image:url(images/bold.png);
+}
+div.markItUp li.markitup_italic a {
+  background-image:url(images/italic.png);
+}
+
+div.markItUp li.markitup_ul a {
+  background-image:url(images/list-bullet.png);
+}
+div.markItUp li.markitup_ol a {
+  background-image:url(images/list-numeric.png);
+}
+
+div.markItUp li.markitup_link a {
+  background-image:url(images/link.png);
+}
+
+div.markItUp li.markitup_quote a  {
+  background-image:url(images/quotes.png);
+}
+
+div.markItUp li.markitup_full_screen {
+  float: right;
+}
+
+div.markItUp li.markitup_full_screen a  {
+  background-image:url(images/full_screen.png);
+}

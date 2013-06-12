@@ -1,0 +1,43 @@
+#dm_page.edit .dm_zones {
+  min-height: 40px;
+}
+
+#dm_page.edit .dm_zone .dm_widgets {
+  outline: 2px groove #fff;
+  margin: 3px;
+  margin-top: 0;
+  padding: 0px;
+}
+
+#dm_page.edit .dm_zone:hover .dm_widgets {
+  outline-color: #a6eded;
+}
+
+#dm_page .dm_zone .dm_zone_edit {
+  margin-left: 1px;
+  margin-top: 3px;
+  background: url(../images/zone_widget_sprite.png) no-repeat;
+  background-position: 0 -38px;
+  width: 52px;
+  height: 19px;
+  display: none;
+}
+
+#dm_page.edit .dm_zone .dm_zone_edit {
+  display: block;
+}
+
+#dm_page.edit .dm_zone:hover .dm_zone_edit {
+  background-position: 0 -57px;
+}
+
+.dm_zone_placeholder {
+  margin: 3px;
+  float: left;
+  opacity: 0.5;
+}
+
+#dm_page.edit .dm_zones.droppable-active {
+  background: url(../images/area_droppable.png) top left no-repeat;
+  min-height: 100px;
+}

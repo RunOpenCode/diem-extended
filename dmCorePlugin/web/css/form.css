@@ -1,0 +1,154 @@
+.dm_form .error_list > li {
+  min-height: 16px;
+  background: url(../images/16/error.png) top left no-repeat;
+  padding-left: 18px;
+  color: #be1111;
+}
+
+.dm_form.list .separator {
+  height: 0;
+  border-bottom: 1px solid #D3D3D3;
+  margin: 10px 20%;
+}
+
+.dm_form.list .dm_form_element > label {
+  float: left;
+  width: 28%;
+  margin-right: 2%;
+  text-align:right;
+}
+
+.dm_form.list.little input.submit {
+  margin-left: 30%;
+}
+
+.dm_form.list .dm_form_element > label.big {
+  width: auto;
+}
+
+.dm_form.list .dm_form_element > label.fnone {
+  float: none;
+}
+
+.dm_form.list .dm_form_element > input,
+.dm_form.list .dm_form_element > .input,
+.dm_form.list .dm_form_element > textarea,
+.dm_form.list .dm_form_element > select {
+  width: 67%;
+}
+
+.dm_form.list .dm_form_element.multi_inputs > input,
+.dm_form.list .dm_form_element > input[type=checkbox],
+.dm_form.list .dm_form_element.multi_inputs > select {
+  width: auto;
+}
+
+.dm_form.list .dm_form_element > .input {
+  float: left;
+}
+
+.dm_form.list.little .dm_form_element {
+  padding: 3px;
+}
+.dm_form.list.little .dm_form_element {
+  padding: 3px;
+}
+.dm_form.list.little .dm_form_element > label {
+  line-height: 18px;
+}
+
+.dm_form .toggle_group {
+  background: url(../../dmCorePlugin/images/default_bg.png) repeat-x scroll 50% 50%;
+  border: 1px solid #D3D3D3;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+.dm_form .toggle_group .toggler {
+  display: block;
+  padding: 5px;
+}
+.dm_form .toggle_group .toggler:hover {
+  border-color: #666;
+  background: url(../../dmCorePlugin/images/default_bg_green.png) repeat-x scroll 50% 50%;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;;
+}
+
+.dm_media_receiver {
+  height: 18px;
+  color: #000;
+}
+.dm_media_receiver.hover {
+  background: url(../../dmCorePlugin/images/default_bg_green.png) repeat-x scroll 50% 50%;
+  border: 1px solid #D3D3D3;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+.droppable_active {
+  background: url(../../dmCorePlugin/images/default_bg_yellow.png) repeat-x scroll 50% 50%;
+}
+
+.droppable_hover {
+  background: url(../../dmCorePlugin/images/default_bg_green.png) repeat-x scroll 50% 50%;
+}
+
+/*
+ * buttons
+ */
+
+div.ui-dialog.dm input[type=submit],
+div.ui-dialog.dm a.button {
+  background: url(../../dmCorePlugin/images/default_bg.png) repeat-x scroll 50% 50%;
+  border:1px solid #D3D3D3;
+  color:#555;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius:  4px;
+  height: 24px;
+  line-height: 24px;
+  cursor: pointer;
+  padding: 0 5px;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+div.ui-dialog.dm a.button {
+  display: block;
+  float: left;
+  height: 22px;
+}
+
+div.ui-dialog.dm a.button.fright {
+  float: right;
+}
+
+div.ui-dialog.dm input.green[type=submit],
+div.ui-dialog.dm a.button.green {
+  background: url(../../dmCorePlugin/images/default_bg_green.png) repeat-x scroll 50% 50%;
+}
+
+div.ui-dialog.dm input.blue[type=submit],
+div.ui-dialog a.button.blue {
+  background: url(../../dmCorePlugin/images/default_bg_blue.png) repeat-x scroll 50% 50%;
+}
+
+div.ui-dialog.dm input.red[type=submit],
+div.ui-dialog.dm a.button.red {
+  background: url(../../dmCorePlugin/images/default_bg_red.png) repeat-x scroll 50% 50%;
+}
+
+div.ui-dialog.dm input.yellow[type=submit],
+div.ui-dialog.dm a.button.yellow {
+  background: url(../../dmCorePlugin/images/default_bg_yellow.png) repeat-x scroll 50% 50%;
+}
+
+div.ui-dialog.dm input[type=submit]:hover,
+div.ui-dialog.dm a.button:hover {
+  border-color: #999;
+  color:#212121;
+  text-decoration: none;
+}

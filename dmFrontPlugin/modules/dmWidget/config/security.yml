@@ -1,0 +1,26 @@
+all:
+  is_secure:    true
+
+new:
+  credentials:  widget_add
+  
+edit:
+  credentials:  [[ widget_edit, widget_edit_fast ]]
+  
+sort:
+  credentials:  widget_edit
+  
+move:
+  credentials:  widget_edit
+  
+delete:
+  credentials:  widget_delete
+
+render:
+  is_secure:    false
+
+editRecord:
+  credentials:  widget_edit_fast_record
+
+getFull:
+  is_secure:    false

@@ -1,0 +1,22 @@
+refresh:
+  is_secure:    true
+  credential:   clear_cache
+  
+refreshStep:
+  is_secure:    true
+  credential:   clear_cache
+
+markdown:
+  is_secure:    true
+  credential:   admin
+
+thumbnail:
+  is_secure:    true
+  credential:   admin
+
+ping:
+  is_secure:    true
+  credential:   admin
+
+selectCulture:
+  is_secure:    false

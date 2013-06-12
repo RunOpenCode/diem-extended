@@ -1,0 +1,16 @@
+{
+    "name": "runopencode/diem-extended",
+    "description": "Diem Extended is CMS CMF based on Diem CMS CMF and Symfony 1.4",
+    "minimum-stability": "alpha",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Nikola Svutlica a.k.a TheCelavi",
+            "email": "thecelavi@gmail.com"
+        },
+        {
+            "name": "Davor Topalić, a.k.a Grouchy",
+            "email": "davor.topalic@gmail.com"
+        }
+    ]
+}

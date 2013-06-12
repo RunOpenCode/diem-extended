@@ -1,0 +1,34 @@
+js:
+
+  front:
+    ctrl:             dmFrontCtrl
+    editCtrl:         dmFrontEditCtrl
+    form:             dmFrontForm
+    toolBar:          dmFrontToolBar
+    pageBar:          dmFrontPageBar
+    mediaBar:         dmFrontMediaBar
+    codeEditor:       dmFrontCodeEditor
+    page:             page/dmPage
+    area:             page/dmArea
+    zone:             page/dmZone
+    widget:           page/dmWidget
+    widgetForms:      widgetForm/dmWidgetForms
+    widgetMenuForm:   widgetForm/dmWidgetNavigationMenuForm
+    pageEditForm:     dmFrontPageEditForm
+    pageAddForm:      dmFrontPageAddForm
+    ajaxPager:        dmFrontAjaxPager
+
+css:
+
+  front:
+    base:             base
+    dmReset:          dmReset
+    toolBar:          toolBar
+    pageBar:          pageBar
+    mediaBar:         mediaBar
+    form:             form
+    zone:             zone
+    widget:           widget
+    codeEditor:       codeEditor
+    pageEditForm:     pageEditForm
+    widgetMenuForm:   widgetForm/menu

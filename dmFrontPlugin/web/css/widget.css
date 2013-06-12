@@ -1,0 +1,73 @@
+#dm_page.edit .dm_widgets {
+  min-height: 20px;
+}
+
+#dm_page.edit .dm_widget .dm_widget_inner {
+  outline: 2px groove #D3D3D3;
+}
+
+#dm_page.edit .dm_widget:hover > .dm_widget_inner {
+  outline-color: #a6edcd;
+}
+
+#dm_page .dm_widget > .dm_widget_edit {
+  margin-top: 3px;
+  margin-left: 0px;
+  background: url(../images/zone_widget_sprite.png) no-repeat;
+  width: 64px;
+  height: 19px;
+  display: none;
+}
+
+#dm_page.edit .dm_widget > .dm_widget_edit {
+  display: block;
+}
+
+#dm_page.edit .dm_widget:hover > .dm_widget_edit {
+  background-position: 0 -19px;
+}
+
+.dm_widget_placeholder {
+  margin: 3px;
+  opacity: 0.5;
+}
+
+div.dm_new_widget {
+  background: url(../images/32/blackbox.png) top left no-repeat;
+  padding-left: 40px;
+  height: 32px;
+  line-height: 32px;
+}
+
+div.dm_widget_edit div.code_editor_links {
+  margin-top: 5px;
+  border-top: 1px solid #888;
+  padding-top: 5px;
+}
+
+div.dm_widget_edit div.code_editor_links > a {
+  float: left;
+  margin-right: 10px;
+}
+
+div.dm_widget_edit_dialog_wrap div.dm_cut_copy_actions a {
+  display: block;
+  height: 16px;
+  float: left;
+  margin-left: 10px;
+}
+
+a.dm_widget_record_edit,
+a.dm_widget_fast_edit {
+  background: url(../images/48/edit.png) top left no-repeat;
+  height: 48px;
+  width: 48px;
+  position: absolute;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+a.dm_widget_record_edit:hover,
+a.dm_widget_fast_edit:hover {
+  opacity: 1;
+}
