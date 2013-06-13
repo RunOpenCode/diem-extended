@@ -234,7 +234,9 @@ parameters:
   less_compiler.options:
     adapter:  dmLessAdapterPHP
     cache_dir: cache
-  
+
+  rich_content_parser.class:  dmRichEditorContentParser  # Parse and update HTML text with valid SRCs and HREFs pointing to DmMedia and DmPage
+
 services:
 
   text_diff:
@@ -567,3 +569,8 @@ services:
     class:                    %less_compiler.class%
     shared:                   true
     arguments:                [%less_compiler.options%]
+
+  rich_content_parser:
+    class:                    %rich_content_parser.class%
+    shared:                   true
+    arguments:                [@event_log, @helper]

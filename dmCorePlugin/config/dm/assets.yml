@@ -56,32 +56,35 @@ js:
     ui-effects-shake:         jquery-ui/js/minified/jquery.effects.shake.min
     ui-effects-slide:         jquery-ui/js/minified/jquery.effects.slide.min
     ui-effects-transfer:      jquery-ui/js/minified/jquery.effects.transfer.min
-    metadata:         metadata/jquery.metadata.min
-    form:             form/jquery.form
-    blockUI:          blockUI/jquery.blockUI-2.39
-    jgrowl:           jgrowl/jquery.jgrowl.min
-    ajaxqueue:        ajaxqueue/jquery.ajaxQueue
-    cookie:           cookie/jquery.cookie.min
-    markitup:         markitup/jquery.markitup.min
-    markitupSet:      dmMarkitup/sets/markdown/set
-    expose:           expose/jquery.expose-1.0.1.min
-    qtip:             qtip/jquery.qtip-1.0.0-rc3.min
-    hotkeys:          hotkeys/jquery.hotkeys-0.8.min
-    jstree:           jstree099b2/jquery.tree.min
-    fieldSelection:   jquery-fieldselection/jquery-fieldselection
-    panView:          panview/jquery-plugin-panview.min
-    tipsy:            tipsy/javascripts/jquery.tipsy.min
-    dataTable:        dataTables-1.6/js/jquery.dataTables.min
-    jeditable:        jeditable/jquery.jeditable.min
-    colorbox:         colorbox/jquery.colorbox.min
-    maxzindex:        maxzindex/jquery.maxzindex
-    json:             json/jquery.json-2.3.min
-    easing:           easing/jquery.easing.1.3.min
-    fancybox:         fancybox/jquery.fancybox.min
-    less:             less/less-1.3.1.min
-    queue:            queue/Queue.min
+    metadata:                 metadata/jquery.metadata.min
+    form:                     form/jquery.form
+    blockUI:                  blockUI/jquery.blockUI-2.39
+    jgrowl:                   jgrowl/jquery.jgrowl.min
+    ajaxqueue:                ajaxqueue/jquery.ajaxQueue
+    cookie:                   cookie/jquery.cookie.min
+    markitup:                 markitup/jquery.markitup.min
+    markitupSet:              dmMarkitup/sets/markdown/set
+    expose:                   expose/jquery.expose-1.0.1.min
+    qtip:                     qtip/jquery.qtip-1.0.0-rc3.min
+    hotkeys:                  hotkeys/jquery.hotkeys-0.8.min
+    jstree:                   jstree099b2/jquery.tree.min
+    fieldSelection:           jquery-fieldselection/jquery-fieldselection
+    panView:                  panview/jquery-plugin-panview.min
+    tipsy:                    tipsy/javascripts/jquery.tipsy.min
+    dataTable:                dataTables-1.6/js/jquery.dataTables.min
+    jeditable:                jeditable/jquery.jeditable.min
+    colorbox:                 colorbox/jquery.colorbox.min
+    maxzindex:                maxzindex/jquery.maxzindex
+    json:                     json/jquery.json-2.3.min
+    easing:                   easing/jquery.easing.1.3.min
+    fancybox:                 fancybox/jquery.fancybox.min
+    less:                     less/less-1.3.1.min
+    queue:                    queue/Queue.min
     # Symfony Form Widgets Section
-    sfWidgetFormDmPageLink: symfony/widgets/sfWidgetFormDmPageLink/js/sfWidgetFormDmPageLink
+    sfWidgetFormDmPageLink:   symfony/widgets/sfWidgetFormDmPageLink/js/sfWidgetFormDmPageLink
+    tinymce:                  tinymce/tinymce.min
+    jquery-tinymce:           tinymce/jquery.tinymce.min
+    sfWidgetFormDmTinyMCE:    symfony/widgets/sfWidgetFormDmTinyMCE/js/sfWidgetFormDmTinyMCE
     
 css:
 

@@ -197,3 +197,13 @@ function dm_render_partial($module, $template_name, array $parameters = array())
 {
     echo dmContext::getInstance()->getHelper()->renderPartial($module, $template_name, $parameters);
 }
+
+/**
+ * @param string $content
+ * @param bool $removeAttributes
+ * @param bool $removeMissingElements
+ * @see dmRichEditorContentParser
+ */
+function parse_rich_content($content, $removeAttributes = true, $removeMissingElements = true) {
+    echo dmContext::getInstance()->getHelper()->parseRichContent($content, $removeAttributes, $removeMissingElements);
+}

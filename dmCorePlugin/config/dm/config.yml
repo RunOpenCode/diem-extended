@@ -79,6 +79,20 @@ default:
     page_cache:                         # Will cache entire pages and serve them very fast.
       enabled:            false         # Enable the page cache for all pages
       life_time:          86400         # Server-side lifetime of the cache in seconds (86400 seconds equals one day)
+
+  rich_editor:
+    class: sfWidgetFormDmTinyMCE
+  tiny_mce:
+    config:
+      theme: modern
+      plugins: [advlist, autolink, lists, link, image, charmap, print, preview, hr, anchor, pagebreak, searchreplace, wordcount, visualblocks, visualchars, code, fullscreen, insertdatetime, media, nonbreaking, save, table, contextmenu, directionality, emoticons, template, paste, textcolor]
+      toolbar1: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+      toolbar2: "print preview | forecolor backcolor"
+      image_advtab: true
+      convert_urls: false
+      relative_urls: false
+      remove_script_host: true
+
  
 ###### dm internal config ######
   

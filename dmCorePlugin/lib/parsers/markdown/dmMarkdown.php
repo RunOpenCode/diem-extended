@@ -1,6 +1,6 @@
 <?php
 
-require_once(dirname(__FILE__).'/vendor/markdown.php');
+require_once(dirname(__FILE__) . '/vendor/markdown.php');
 
 class dmMarkdown extends MarkdownExtra_Parser
 {

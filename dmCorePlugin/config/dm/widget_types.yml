@@ -12,6 +12,12 @@ dmWidgetContent:
   title:
     cache:              static
 
+  rich:
+    cache:              true
+    name:               HTML content
+    view_class:         dmWidgetContentRichTextView
+    form_class:         dmWidgetContentRichTextForm
+
   link:
     cache:              true
 
